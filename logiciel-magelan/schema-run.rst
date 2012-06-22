@@ -61,9 +61,7 @@ Et qu'il n'a donc pas de code client alors on l'ignore
 Sinon On affecte a la ligne magellan le code client du doublon 
 Le doublon est approuvée et une deuxieme analyse sera néscésaire pour synchroniser cette fiche
 
-Lexique : 
-=========
 
-.. note::
+.. note:: Lexique
 
-	ncc = numéro code client
+	- ncc = numéro code client
