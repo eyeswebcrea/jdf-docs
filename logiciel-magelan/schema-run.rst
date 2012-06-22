@@ -1,3 +1,6 @@
+Schema de fonctionnement
+========================
+
 ::
 
   But_phase1_Click() // l’ors du click sur le bouton phase 1 : Nouveau client 

@@ -1,6 +1,8 @@
 Bienvenue dans la documentation de jardinier de france
 
 
-Logiciel Magelan : Python_.
+- Logiciel Magelan_.
+- Service d'intégration magélan
+- PGI (Prologiciel de gestion intégrée)
 
-.. _Python: logiciel-magelan/index.html
+.. _Magelan: logiciel-magelan/index.html
