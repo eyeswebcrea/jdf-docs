@@ -1,7 +1,7 @@
 Schema de fonctionnement
 ========================
 
-code-block:: text
+.. code-block:: php
 
   But_phase1_Click() // l’ors du click sur le bouton phase 1 : Nouveau client 
   {
