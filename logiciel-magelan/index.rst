@@ -5,5 +5,5 @@ Logiciel Magelan
 
 - FAQ_
 
-.. _Schema de fonctionnement : schema-run
-.. _FAQ : faq
+.. _Schema de fonctionnement : schema-run.html
+.. _FAQ : faq.html
