@@ -77,3 +77,13 @@ afficher sur la vue est egale a son propre compteur
 	.. image:: images/ds_in.Analyse.png 
 
 	- ncc = numéro code client
+	
+   +-----------------------+-----------------------+
+   | Symbol                | Meaning               |
+   +=======================+=======================+
+   | .. image:: tent.png   | Campground            |
+   +-----------------------+-----------------------+
+   | .. image:: waves.png  | Lake                  |
+   +-----------------------+-----------------------+
+   | .. image:: peak.png   | Mountain              |
+   +-----------------------+-----------------------+
