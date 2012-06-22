@@ -1,6 +1,6 @@
-Bienvenue dasn un test
+Bienvenue dans la documentation de jardinier de france
 
 
-External hyperlinks, like Python_.
+Logiciel Magelan : Python_.
 
-.. _Python: logiciel-magelan/index.rst
+.. _Python: logiciel-magelan/index.html
