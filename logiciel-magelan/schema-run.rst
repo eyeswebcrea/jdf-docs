@@ -53,7 +53,7 @@ Si il y a effectivement doublon dans la base jdf alors on
 Affecte a code client au donée du client cotée magelan champ **code_p**  avec **code_r**
 
 Peut etre
----------:
+---------
 
 Si le doublon est en prospect donc est inscrit dans la base mais n'est aps encore client 
 Et qu'il n'a donc pas de code client alors on l'ignore 
