@@ -70,5 +70,10 @@ afficher sur la vue est egale a son propre compteur
 
 	Me.DataGrid1.DataSource
 	DataView1.table = Me.ds_in.Analyse 
+	
+	
+	ds_in.Analyse(In Database) => DataView1(Array Contenue) => DataGrid1 (View)
+	
+	.. image:: images/ds_in.Analyse.png 
 
 	- ncc = numéro code client
