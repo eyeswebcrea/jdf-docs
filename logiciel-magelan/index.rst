@@ -26,14 +26,17 @@ On verfie qu’il y a bien une ligne affecter par la requete d’insertion pas 2
 Si oui on crée un complément d’asso valide en inserent dans la table cmpasso les donée suivantes :
 
 codeclient = code client généré précédament l’ors de l’insertion du client 
-iscl = 0
-isprof = 0 
-isadm = 0
-isadh =  0
-isclubiste = 0
-iscd = 0
-iscad = 0
-isabo = 0
+
+::
+
+	iscl = 0
+	isprof = 0 
+	isadm = 0
+	isadh =  0
+	isclubiste = 0
+	iscd = 0
+	iscad = 0
+	isabo = 0
 
 
 La méthode NouveauCodeClient :
