@@ -14,6 +14,8 @@ Schema de fonctionnement
 affecter_double_automatique()
 -----------------------------
 
+Le client analyser est celui actuellement afficher car il recup son n° de compteur
+
 Si pas de doublon potentiel : on crée une nouvelle fiche
 
 Le systeme crée le client avec al methode creer_client()
@@ -61,7 +63,12 @@ Et qu'il n'a donc pas de code client alors on l'ignore
 Sinon On affecte a la ligne magellan le code client du doublon 
 Le doublon est approuvée et une deuxieme analyse sera néscésaire pour synchroniser cette fiche
 
+L'affection d'un code client sur une fiche magelan ce fait sur le champ donc le compteur 
+afficher sur la vue est egale a son propre compteur 
 
 .. note:: Lexique
+
+	Me.DataGrid1.DataSource
+	DataView1.table = Me.ds_in.Analyse 
 
 	- ncc = numéro code client
