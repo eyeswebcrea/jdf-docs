@@ -1,9 +1,9 @@
 Logiciel Magelan
 ================
 
-- Schema de fonctionnement_
+- `Schema de fonctionnement`_
 
 - FAQ_
 
-.. _`Schema de fonctionnement` : logiciel-magelan/schema-run.html
+.. _Schema de fonctionnement : logiciel-magelan/schema-run.html
 .. _FAQ : logiciel-magelan/faq.html
