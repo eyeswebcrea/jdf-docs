@@ -66,7 +66,8 @@ Le doublon est approuvée et une deuxieme analyse sera néscésaire pour synchro
 L'affection d'un code client sur une fiche magelan ce fait sur le champ donc le compteur 
 afficher sur la vue est egale a son propre compteur 
 
-.. note:: Lexique
+Lexique
+-------
 
 	Me.DataGrid1.DataSource
 	DataView1.table = Me.ds_in.Analyse 
@@ -75,6 +76,8 @@ afficher sur la vue est egale a son propre compteur
 	ds_in.Analyse(In Database) => DataView1(Array Contenue) => DataGrid1 (View)
 	
 	.. image:: images/ds_in.Analyse.png 
+
+.. note:: 
 
 	- ncc = numéro code client
 	
