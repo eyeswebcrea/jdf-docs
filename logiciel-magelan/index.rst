@@ -9,4 +9,4 @@ Logiciel Magelan
 
 .. _Schema de fonctionnement : schema-run.html
 .. _FAQ : faq.html
-.. _Requetes : requetes.rst
+.. _Requetes : requetes.html
