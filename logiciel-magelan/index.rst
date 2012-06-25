@@ -5,7 +5,7 @@ Logiciel Magelan
 
 - FAQ_
 
-- `Requetes`
+- Requetes_
 
 .. _Schema de fonctionnement : schema-run.html
 .. _FAQ : faq.html
