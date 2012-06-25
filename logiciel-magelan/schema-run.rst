@@ -11,8 +11,8 @@ Schema de fonctionnement
   	grp_double.BringToFront()
   }
 
-affecter_double_automatique()
------------------------------
+La fonction affecter_double_automatique :
+-----------------------------------------
 
 Le client analyser est celui actuellement afficher car il recup son n° de compteur
 
@@ -66,6 +66,7 @@ Le doublon est approuvée et une deuxieme analyse sera néscésaire pour synchro
 L'affection d'un code client sur une fiche magelan ce fait sur le champ donc le compteur 
 afficher sur la vue est egale a son propre compteur 
 
+
 Lexique
 -------
 
@@ -73,7 +74,7 @@ Lexique
 	DataView1.table = Me.ds_in.Analyse 
 	
 	
-	ds_in.Analyse(In Database) => DataView1(Array Contenue) => DataGrid1 (View)
+	Me.SqlSelectCommand => daAnalyse(.SelectCommand) =>[Fill] ds_in.Analyse(In Database) => DataView1(Array Contenue) => DataGrid1 (View)
 	
 	.. image:: images/ds_in.Analyse.png 
 
