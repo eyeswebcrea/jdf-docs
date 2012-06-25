@@ -7,6 +7,18 @@ Me.SqlSelectCommand1
 Resumée de la requête:
 ~~~~~~~~~~~~~~~~~~~~~~
 
+La requete selectionne le nom, prenom , adresse, code postal, ville de la table Client (Jdf)
+
+Des ligne dont un des champs suivant :
+
+	- nom
+	- prenom
+	- raison sociale
+	- nom societe
+	
+
+de la table megelan sont en duplicata dans la table client 
+
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
