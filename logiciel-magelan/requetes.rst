@@ -26,70 +26,78 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
-
+	-- *********** Lexique ************
+	-- jdf = jardinier de france
 	-- m = Table magellan (Information de magelan)
 	-- c = Table client (Information de jdf)
+	-- charindex = strpos (php)
+	-- soundex = composition phonetique d'un mot resultat sous la forme d'un nombre à quatre chiffre
+	-- difference = calcule le soundnex de deux chaine et renvoie 0 à 4 selon la similitude 0 pour pas 4 pour beaucoup
+	-- SELECT -- Selectionne les champs de la table 'client' (JDF) et leur applique un alias
+	-- dbo.fn_Dmot = Recupere le dernier mot d'une chaine
+	-- les champs ctrl_* sont des valeur de controle de comformité des champs ce ne sont pas de vrai champ en bdd
+	-- m.Code_P = c.CodeClient , c.CodeClient = CmpAsso.codeclient | Ces champs sont la représentation du code clients
+	-- ********************************
 	
-	SELECT -- Selectionne les champs de la table 'client' (JDF) et leur applique un alias
-		c.Nom AS JDF_Nom,		-- Champ nom 
-		c.Prenom AS JDF_Prenom, -- Champ prenom
-		c.Adresse2 AS JDF_Adr2, -- Champ adresse 2
-		c.Adresse3 AS JDF_adr3, -- Champ adresse 3
-		c.CodePostal AS JDF_cp, -- Champ adresse 4
+		c.Nom AS JDF_Nom,		-- Champ nom avec pour alias JDF_Nom
+		c.Prenom AS JDF_Prenom, -- Champ prenom avec pour alias JDF_Prenom
+		c.Adresse2 AS JDF_Adr2, -- Champ adresse 2 avec pour alias JDF_Adr2
+		c.Adresse3 AS JDF_adr3, -- Champ adresse 3 avec pour alias JDF_Adr3
+		c.CodePostal AS JDF_cp, -- Champ adresse 4 Avec pour alias JDF_cp
 		c.Ville AS JDF_Ville,
-			CASE WHEN raisoc IS NULL THEN                    	-- 			Si raisoc (Raison sociale) est nul alors ...
-				CASE WHEN difference(m.nom, c.nom) > 2       	-- 					Si le nom est différent entre magelan et jdf  ...
-					  AND 							 		 	-- 					ET
-				      (									     	-- 					(   
-				     	(m.prenom IS NULL OR m.prenom = '')  	-- 						(Si le champ nom de magelan est null ou vide) 
-				     	AND 							 	 	-- 						ET
-				      	(c.prenom IS NULL OR c.prenom = '')  	-- 						(Si Le champ prenom de magelan est nul ou vide)
-				      ) 									 	-- 					)
-				      OR 									 	-- 					OU
-				      difference(m.prenom, c.prenom) > 2 THEN   -- 					Si le champ prenom est différent entre magelan et jdf
-			    'O' ELSE 'N'									-- 						Alors O sinon N 
-			    END												-- 					Fin 		
-				ELSE CASE WHEN difference(m.raisoc, ltrim(c.adresse0)) > 2  --      Sinon si 
-					AND
-					(
-						(charindex(m.nom, c.nomsociete) > 0 OR difference(m.nom, c.nom) > 2)
-						OR 
-						m.nom IS NULL
-					) 
-					THEN 'O' ELSE 'N' 
-				END 
-			END AS ctrl_nom,
-			CASE WHEN c.codepostal = m.cp THEN 
-			'O' ELSE 'N' 
-			END AS ctrl_CP,
-			CASE WHEN (
-						 soundex(dbo.fn_Dmot(c.adresse2)) IN
-						 (
-						 	soundex(dbo.fn_Dmot(m.adr1)),
-						  	soundex(dbo.fn_Dmot(m.adr2)),
-						  	soundex(dbo.fn_Dmot(m.adr3)),
-						  	soundex(dbo.fn_Dmot(m.adr4))
-						 ) 
-						 OR
-						 (
-						 	c.adresse2 IS NULL OR  ltrim(c.adresse2) = ''
-					 	 )
-					   ) 
-					   AND 
-					   (
-					      soundex(dbo.fn_Dmot(c.adresse3)) IN 
-					   (
-					   	  soundex(dbo.fn_Dmot(m.adr1)),
-					   	  soundex(dbo.fn_Dmot(m.adr2)),
-					   	  soundex(dbo.fn_Dmot(m.adr3)),
-					   	  soundex(dbo.fn_Dmot(m.adr4))
-					   ) 
-					   OR
-					   (
-					   	  c.adresse3 IS NULL OR ltrim(c.adresse3) = '')) THEN
-					   	  'O' ELSE 'N' 
-					   	  END AS 
-					   	  		ctrl_adr,
+			CASE WHEN raisoc IS NULL THEN                    									-- 			Si raisoc (Raison sociale) est nul alors ...
+				CASE WHEN difference(m.nom, c.nom) > 2       									-- 					Si le nom est ressemblant phonétiquement entre magelan et jdf  ...
+					  AND 							 		 									-- 					ET
+				      (									     									-- 					(   
+				     	(m.prenom IS NULL OR m.prenom = '')  									-- 						(Si le champ nom de magelan est null ou vide) 
+				     	AND 							 	 									-- 						ET
+				      	(c.prenom IS NULL OR c.prenom = '')  									-- 						(Si Le champ prenom de magelan est nul ou vide)
+				      ) 									 									-- 					)
+				      OR 									 									-- 					OU
+				      difference(m.prenom, c.prenom) > 2 THEN   								-- 					Si le champ prenom est ressemblant phonétiquement entre magelan et jdf
+			    'O' ELSE 'N'																	-- 						Alors O sinon N 
+			    END																				-- 					Fin 		
+				ELSE CASE WHEN difference(m.raisoc, ltrim(c.adresse0)) > 2  					--      			Sinon si 
+					AND																			-- 					Et 
+					(																			--					(
+						(charindex(m.nom, c.nomsociete) > 0 OR difference(m.nom, c.nom) > 2) 	-- 						Si le nom (magelan) est present dans le nom de la societe (jdf) ou si le nom est ressemblant phonétiquement entre magelan et jdf
+						OR 																		-- 						Sinon 
+						m.nom IS NULL 															--						Si le nom (magelan) est null
+					) 																			-- 					)
+					THEN 'O' ELSE 'N' 															--						Alors O Sinon N
+				END 																			--					Fin					
+			END AS ctrl_nom,																	--					On stocke la reponse du nom ctr_nom
+			CASE WHEN c.codepostal = m.cp THEN 													--			Si Le code postal (jdf) est égale au code postal (magellan) Alors
+			'O' ELSE 'N' 																		-- 			Alors O Sinon N
+			END AS ctrl_CP,																		--			On stocke le controle du code postal dans ctrl_cp
+			CASE WHEN (																			--			Si (
+						 soundex(dbo.fn_Dmot(c.adresse2)) IN									--			La composition phonétique du dernier mot de l'adresse 2 (jdf) se retrouve dans l'une de ces valeur
+						 (																		--			( 		
+						 	soundex(dbo.fn_Dmot(m.adr1)),										--				La composition phonétique du dernier mot de l'adresse 1 (magelan)
+						  	soundex(dbo.fn_Dmot(m.adr2)),										--				La composition phonétique du dernier mot de l'adresse 2 (magelan)
+						  	soundex(dbo.fn_Dmot(m.adr3)),										--				La composition phonétique du dernier mot de l'adresse 3 (magelan)
+						  	soundex(dbo.fn_Dmot(m.adr4)) 										--				La composition phonétique du dernier mot de l'adresse 4 (magelan)
+						 ) 																		--			)
+						 OR																		--			Ou
+						 (																		--			(
+						 	c.adresse2 IS NULL OR  ltrim(c.adresse2) = ''						--				Si l'adresse 2 (jdf) est null ou vide
+					 	 )																		--
+					   ) 																		--			)
+					   AND 																		--			Et
+					   (																		--			(
+					      soundex(dbo.fn_Dmot(c.adresse3)) IN 									--			Si la composition phonétique du dernier mot de l'adresse 3 (jdf) se retrouve dans l'une de ces valeur
+					   (																		--			(
+					   	  soundex(dbo.fn_Dmot(m.adr1)),											--				La composition phonétique du dernier mot de l'adresse 1 (magelan)
+					   	  soundex(dbo.fn_Dmot(m.adr2)),											--				La composition phonétique du dernier mot de l'adresse 2 (magelan)
+					   	  soundex(dbo.fn_Dmot(m.adr3)),											--				La composition phonétique du dernier mot de l'adresse 3 (magelan)
+					   	  soundex(dbo.fn_Dmot(m.adr4)) 											--				La composition phonétique du dernier mot de l'adresse 4 (magelan)
+					   ) 																		--			)
+					   OR																		--			Ou
+					   (																		--			(
+					   	  c.adresse3 IS NULL OR ltrim(c.adresse3) = '')) THEN					--				Si L'adresse 3 (Jdf) est null et vide 
+					   	  'O' ELSE 'N' 															--				Alors O sinon N
+					   	  END AS 																--			On Stocke la réponse dans
+					   	  		ctrl_adr,														--			ctrl_adr 
 					   	  		m.Code_R,
 					   	  		m.Code_P,
 					   	  		m.Code_Action,
