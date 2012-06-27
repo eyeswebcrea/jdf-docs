@@ -4,9 +4,9 @@ General
 
 -  Lexique_
 -  Requetes_
-- `Fonctions scalaires`
-- `Procédure stockée`
-- `Détails des tables`
+- `Fonctions scalaires`_
+- `Procédure stockée`_
+- `Détails des tables`_
 
 .. _Lexique: lexique.html
 
