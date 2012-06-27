@@ -7,9 +7,9 @@ Bienvenue dans la documentation de jardinier de france
 - `PGI (Prologiciel de gestion intégrée)`_
 -  Lexique_
 -  Requetes_
-- `Fonctions scalaires`
-- `Procédure stockée`
-- `Détails des tables`
+- `Fonctions scalaires`_
+- `Procédure stockée`_
+- `Détails des tables`_
 
 .. _Logiciel Magelan: logiciel-magelan/index.html
 
