@@ -13,4 +13,4 @@ Bienvenue dans la documentation de jardinier de france
 
 .. _PGI (Prologiciel de gestion intégrée): logiciel-magelan/index.html
 
-.. _General: general/index.rst
+.. _General: general/index.html
