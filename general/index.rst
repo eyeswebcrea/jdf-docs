@@ -2,6 +2,12 @@
 General
 =======
 
+-  Lexique_
+-  Requetes_
+- `Fonctions scalaires`
+- `Procédure stockée`
+- `Détails des tables`
+
 .. _Lexique: lexique.html
 
 .. _Requetes: requetes.html
