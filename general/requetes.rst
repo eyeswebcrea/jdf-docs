@@ -34,6 +34,7 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
+
 	-- *********** Lexique ************
 	-- jdf = jardinier de france
 	-- m = Table magellan (Information de magelan)
@@ -189,3 +190,5 @@ Détails de la requete:
 				(m.Ech_fin IS NOT NULL) 
 				AND 
 				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)
+				
+				
