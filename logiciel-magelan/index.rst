@@ -1,3 +1,6 @@
+.. toctree::
+   :numbered:
+
 Logiciel Magelan
 ================
 
