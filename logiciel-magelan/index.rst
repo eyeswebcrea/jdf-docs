@@ -1,5 +1,5 @@
 .. toctree::
-   :numbered:
+   :maxdepth: 5
 
 Logiciel Magelan
 ================
