@@ -154,7 +154,7 @@ pygments_style = 'sphinx'
 htmlhelp_basename = 'testdoc'
 
 rst_epilog = """
-.. |Lexique| replace:: composition phonetique d'un mot resultat sous la forme d'un nombre à quatre chiffre
+Un epilog
 """
 
 
