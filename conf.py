@@ -23,7 +23,7 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc']
+#extensions = ['sphinx.ext.autodoc']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
@@ -152,6 +152,10 @@ pygments_style = 'sphinx'
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'testdoc'
+
+rst_epilog = """
+.. |soundex| replace:: composition phonetique d'un mot resultat sous la forme d'un nombre à quatre chiffre
+"""
 
 
 # Options for LaTeX output

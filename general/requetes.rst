@@ -15,7 +15,7 @@ Me.SqlSelectCommand1
 Resumée de la requête:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-La requete selectionne le nom, prenom , adresse, code postal, ville de la table Client (Jdf)
+La requete selectionne le nom, prenom , adresse, code postal, ville de la table Client (Jdf), la table CmpAsso (Jdf) et la table magelan (magelan)
 
 Des ligne dont un des champs suivant :
 
@@ -169,12 +169,12 @@ Détails de la requete:
 					   	  		c.Pays AS Jdf_pays,												--		Selection du pays avec pour alias Jdf_pays (jdf)
 					   	  		CmpAsso.datenomADH,												--		(?) Selection de la date nom adhérent (jdf)
 					   	  		CmpAsso.Situation_APR,											--		(?) Selection de la situation APR (jdf)
-					   	  		CmpAsso.DateSituation_APR,
-					   	  		CmpAsso.RefSituation_APR,
-					   	  		c.pasclub 
-	FROM Magellan m 
-		LEFT OUTER JOIN Clients c ON m.Code_P = c.CodeClient 
-		LEFT OUTER JOIN CmpAsso ON c.CodeClient = CmpAsso.codeclient 
+					   	  		CmpAsso.DateSituation_APR,										--		(?) Selection de la date situation APR (jdf)
+					   	  		CmpAsso.RefSituation_APR,										--		(?) Selection de la référence de la situation (jdf)
+					   	  		c.pasclub 														--		(?) Selection de la boolean appartien ou est un club (jdf)
+	FROM Magellan m 																			--		Sur la table magelan avec pour alias m
+		LEFT OUTER JOIN Clients c ON m.Code_P = c.CodeClient 									--		Ainsi que la table Clients avec pour alias c et dont la ligne du code client magelan doit etre la meme que el code client jdf 
+		LEFT OUTER JOIN CmpAsso ON c.CodeClient = CmpAsso.codeclient 							--		Ainsi que la table CmpAsso et dont la ligne du code client compte asso doit etre la meme que al ligne du code client clients 
 			WHERE 
 				(m.synchro = 0) 
 				AND 
