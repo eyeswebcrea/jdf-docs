@@ -1,6 +1,10 @@
 .. toctree::
    :maxdepth: 5 
-
+   
+   logiciel-magelan/index
+   general/index
+   site-extranet/index
+   
 ======================================================
 Bienvenue dans la documentation de jardinier de france
 ======================================================
