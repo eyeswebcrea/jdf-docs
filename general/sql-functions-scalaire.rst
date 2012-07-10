@@ -22,7 +22,7 @@ Todo : Penser à crée un alias getLastWorldInString pour avoir une fonction plu
 	GO																										-- C'est partie
 	SET QUOTED_IDENTIFIER ON																				-- Force SQL Server à suivre les règles ISO se rapportant aux guillemets qui délimitent les identificateurs et les chaînes littérales.
 	GO
-	ALTER FUNCTION [dbo].[fn_Dmot](@rue as varchar(38))														-- Modifie la table des fonctions sql pour ajouter la fonction dbo.fn_Dmot avec comme parametre rue qui est une varchar(3
+	ALTER FUNCTION [dbo].[fn_Dmot](@rue as varchar(38))														-- Modifie la table des fonctions sql pour ajouter la fonction dbo.fn_Dmot avec comme paramêtre rue qui est une varchar(3
 	
 	
 	RETURNS varchar(38) AS  -- On déclare que la fonction retourne une valeur varchar(38)

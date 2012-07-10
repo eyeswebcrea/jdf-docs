@@ -3,8 +3,6 @@ Détails Général des tables
 ==========================
 
 
-
-
 Table cmpAsso 
 -------------
 
@@ -56,5 +54,5 @@ Architecture
 
 
 
-Schema de relation de la base:
+Schéma de relation de la base:
 ------------------------------

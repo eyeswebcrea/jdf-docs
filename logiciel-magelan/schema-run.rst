@@ -12,22 +12,40 @@ Schema de fonctionnement
   	grp_double.BringToFront()
   }
 
-La fonction affecter_double_automatique :
------------------------------------------
+La fonction affecter_double_automatique
+---------------------------------------
 
-Le client analyser est celui actuellement afficher car il recup son n° de compteur
+Le client analysé est celui qui est actuellement afficher, il se base sur son numéro de compteur.
 
-Si pas de doublon potentiel : on crée une nouvelle fiche
+S'il n'y a pas de doublon potentiel alors on crée une nouvelle fiche
 
-Le systeme crée le client avec al methode creer_client()
+Le systeme crée le client via la methode ``creer_client()``
 
-Il insere le client dans la table client avec
+Il insère le client dans la table client avec pour champs
 
-codeclient, origine, type, datecreationfiche, opcrea, nom, prenom, nomsociete, adresse1, adresse2, adresse3, codepostal, ville, adresse0, societe, pays, coderustica, club, titre
+codeclient,
+origine,
+type,
+datecreationfiche,
+opcrea,
+nom,
+prenom,
+nomsociete,
+adresse1,
+adresse2,
+adresse3,
+codepostal,
+ville,
+adresse0,
+societe,
+pays,
+coderustica,
+club,
+titre
 
-On verfie qu’il y a bien une ligne affecter par la requete d’insertion pas 2,0,-1 mais bien 1
+On verifie qu’il y a bien une ligne affecter par la requete d’insertion ni plus ni moins.
 
-Si oui on crée un complément d’asso valide en inserent dans la table cmpasso les donée suivantes :
+Si oui on crée un complément d’association valide en inserent dans la table ``cmpasso`` les données suivantes :
 
 codeclient = code client généré précédament l’ors de l’insertion du client 
 
@@ -43,29 +61,29 @@ codeclient = code client généré précédament l’ors de l’insertion du cli
 	isabo = 0
 
 
-La méthode NouveauCodeClient :
-------------------------------
+La méthode NouveauCodeClient
+----------------------------
 
-L’information est obtenu dans la table parametre
+L’information est obtenu dans la table ``paramêtre``
 
-On utilise la procedure stockée dans jdf_nouveauCodeClient
+On utilise la procedure stockée dans ``jdf_nouveauCodeClient``
 
 
 Si il y a effectivement doublon dans la base jdf alors on 
 
-Affecte a code client au donée du client cotée magelan champ **code_p**  avec **code_r**
+Affecte à code client au données du client cotée magelan champ **code_p**  avec **code_r**
 
-Peut etre
+Peut être
 ---------
 
-Si le doublon est en prospect donc est inscrit dans la base mais n'est aps encore client 
+Si le doublon est en prospect donc est inscrit dans la base mais n'est pas encore client 
 Et qu'il n'a donc pas de code client alors on l'ignore 
 
-Sinon On affecte a la ligne magellan le code client du doublon 
-Le doublon est approuvée et une deuxieme analyse sera néscésaire pour synchroniser cette fiche
+Sinon On affecte à la ligne magellan le code client du doublon 
+Le doublon est alors approuvée et une deuxieme analyse sera néscésaire pour synchroniser cette fiche
 
-L'affection d'un code client sur une fiche magelan ce fait sur le champ donc le compteur 
-afficher sur la vue est egale a son propre compteur 
+L'affectation d'un code client sur une fiche magelan ce fait sur le champ dont le compteur 
+afficher sur la vue est egale à son propre compteur.
 
 
 Lexique
