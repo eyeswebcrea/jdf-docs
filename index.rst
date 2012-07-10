@@ -1,5 +1,5 @@
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 5 
 
 ======================================================
 Bienvenue dans la documentation de jardinier de france
