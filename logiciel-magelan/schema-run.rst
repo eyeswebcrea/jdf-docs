@@ -95,7 +95,7 @@ Lexique
 	
 	Me.SqlSelectCommand => daAnalyse(.SelectCommand) =>[Fill] ds_in.Analyse(In Database) => DataView1(Array Contenue) => DataGrid1 (View)
 	
-	.. image:: images/ds_in.Analyse.png 
+	.. image:: images/ds_in_Analyse.png 
 
 .. note:: 
 
