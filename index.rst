@@ -11,12 +11,12 @@ Bienvenue dans la documentation de jardinier de france
 - `PGI (Prologiciel de gestion intégrée)`_
 - Extranet_
 
-.. _Logiciel Magelan: logiciel-magelan/index
+.. _Logiciel Magelan: logiciel-magelan/index.rst
 
-.. _Service d'intégration magélan: logiciel-magelan/index
+.. _Service d'intégration magélan: logiciel-magelan/index.rst
 
-.. _PGI (Prologiciel de gestion intégrée): logiciel-magelan/index
+.. _PGI (Prologiciel de gestion intégrée): logiciel-magelan/index.rst
 
-.. _General: general/index
+.. _General: general/index.rst
 
-.. _Extranet: site-extranet/index
+.. _Extranet: site-extranet/index.rst
