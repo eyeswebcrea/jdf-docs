@@ -171,12 +171,12 @@ pygments_style = 'sphinx'
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
   ('index', 'test.tex', ur'Jardinier de france Documentation',
-   ur'foo', 'manual'),
+   ur'Eyeswebcrea', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+latex_logo = 'logo.jpg'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.

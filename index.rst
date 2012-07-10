@@ -1,8 +1,11 @@
+.. toctree::
+   :maxdepth: 5
+
 ======================================================
 Bienvenue dans la documentation de jardinier de france
 ======================================================
 
--  General_
+- General_
 - `Logiciel Magelan`_
 - `Service d'intégration magélan`_
 - `PGI (Prologiciel de gestion intégrée)`_
