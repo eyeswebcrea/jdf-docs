@@ -1,5 +1,5 @@
-Les des requetes :
-==================
+Les requetes :
+==============
 
 Lexique
 =======
