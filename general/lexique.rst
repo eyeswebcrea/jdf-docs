@@ -18,3 +18,4 @@ Lexique
 - les champs ctrl_* sont des valeur de controle de comformité des champs ce ne sont pas de vrai champ en bdd
 - m.Code_P = c.CodeClient , c.CodeClient = CmpAsso.codeclient | Ces champs sont la représentation du code clients
 - (?) =  Ligne de requete donc l'explication n'est pas encore suffisament claire
+- da = DataAcces équivalent des entité symfony

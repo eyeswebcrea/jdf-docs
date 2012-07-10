@@ -1,5 +1,5 @@
-Les des requetes Requete :
-=========
+Les des requetes :
+==================
 
 Lexique
 =======
@@ -16,6 +16,16 @@ Resumée de la requête:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 La requete selectionne le nom, prenom , adresse, code postal, ville de la table Client (Jdf), la table CmpAsso (Jdf) et la table magelan (magelan)
+
+Elle alligne les ligne de ces tables avec les conditions suivantes :
+
+m.Code_P = c.CodeClient , c.CodeClient = CmpAsso.codeclient
+
+Elle ne prend que ligne dont les champs suivant ne ressemble pas phonétiquement entre ceux de magelan et jdf
+
+Il y a un champ dont elle ne prend pas toutes la valeur phonétique mais seulement le dernier mot grace a la fonction scalaire Dmot
+
+Si la n'est pas déja synchronisé avec jdf (m.synchro) et n'est pas dans les anomalie on l'identifie si le compteur est dans les anomalies
 
 Des ligne dont un des champs suivant :
 
@@ -175,20 +185,20 @@ Détails de la requete:
 	FROM Magellan m 																			--		Sur la table magelan avec pour alias m
 		LEFT OUTER JOIN Clients c ON m.Code_P = c.CodeClient 									--		Ainsi que la table Clients avec pour alias c et dont la ligne du code client magelan doit etre la meme que el code client jdf 
 		LEFT OUTER JOIN CmpAsso ON c.CodeClient = CmpAsso.codeclient 							--		Ainsi que la table CmpAsso et dont la ligne du code client compte asso doit etre la meme que al ligne du code client clients 
-			WHERE 
-				(m.synchro = 0) 
-				AND 
-				( NOT (m.Code_P IS NULL) ) 
-				AND 
-				(
-					m.compteur NOT IN 
-						(
-							SELECT compteur FROM magellan_anomalie
-						)
-				) 
-				AND 
-				(m.Ech_fin IS NOT NULL) 
-				AND 
-				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)
+			WHERE 																				--		Si
+				(m.synchro = 0) 																--		La ligne coté magelan n'est pas encore synchronisée avec jdf
+				AND 																			--		Et
+				( NOT (m.Code_P IS NULL) ) 														--		(?) Et que le code P n'est pas nul (magelan)
+				AND 																			--		Et
+				(																				--		(
+					m.compteur NOT IN 															--			Le Compteur n'est pas dans (magelan)
+						(																		--			(
+							SELECT compteur FROM magellan_anomalie								--				les compteur considerer comme anomalie (magelan)
+						)																		--			)
+				) 																				--		)
+				AND 																			--		Et
+				(m.Ech_fin IS NOT NULL) 														--		L'echeance de fin de magelan est null (magelan)
+				AND 																			--		Et
+				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)							--		Le compteur se trouve entre le compteur début et fin specifier (magelan)
 				
 				

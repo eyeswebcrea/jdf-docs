@@ -1,7 +1,7 @@
 .. toctree::
    :maxdepth: 5
 
-Logiciel Magelan
+Site web  extranet
 ================
 
 - `Schema de fonctionnement`_

@@ -151,11 +151,11 @@ pygments_style = 'sphinx'
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'testdoc'
+#htmlhelp_basename = 'testdoc'
 
-rst_epilog = """
-Un epilog
-"""
+#rst_epilog = """
+#Un epilog
+#""""
 
 
 # Options for LaTeX output
@@ -170,8 +170,8 @@ Un epilog
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'test.tex', ur'test Documentation',
-   ur'foo', 'manual'),
+  ('index', 'test.tex', ur'Jardinier de france Documentation',
+   ur'foo', 'manual'),cc
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
