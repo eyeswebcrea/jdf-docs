@@ -17,17 +17,17 @@ Resumée de la requête:
 
 La requête sélectionne le nom, prenom , adresse, code postal, ville de la table Client (Jdf), la table CmpAsso (Jdf) et la table magelan (magelan)
 
-Elle alligne les lignes de ces tables avec les conditions suivantes :
+Elle aligne les lignes de ces tables avec les conditions suivantes :
 
 m.Code_P = c.CodeClient , c.CodeClient = CmpAsso.codeclient
 
-Elle ne prend que les lignes dont les champs suivant ne ressemble pas phonétiquement entre ceux de magelan et jdf
+Elle ne prend que les lignes dont les champs suivant de magelan ne ressemblent pas phonétiquement à ceux jdf
 
-Il y a un champ dont elle ne prend pas toutes la valeur phonétique mais seulement le dernier mot grace a la fonction scalaire Dmot
+Il y a un champ dont elle ne prend pas toute la valeur phonétique mais seulement le dernier mot grâce à la fonction scalaire Dmot
 
-Si la n'est pas déja synchronisé avec jdf (m.synchro) et n'est pas dans les anomalie on l'identifie si le compteur est dans les anomalies
+Si la ligne n'est pas déja synchronisé avec jdf (m.synchro) et n'est pas dans les anomalie ( si le compteur n'est pas dans les anomalies )
 
-Des ligne dont un des champs suivant :
+Des lignes dont un des champs suivant :
 
 	- nom
 	- prenom
@@ -35,7 +35,7 @@ Des ligne dont un des champs suivant :
 	- nom societe
 	
 
-de la table magelan sont en duplicata dans la table client 
+de la table magelan sont présents en double dans la table client 
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,11 +89,11 @@ Détails de la requete:
 					THEN 'O' ELSE 'N' 															--						Alors O Sinon N
 				END 																			--					Fin					
 			END AS ctrl_nom,																	--					On stocke la reponse du nom ctr_nom
-			CASE WHEN c.codepostal = m.cp THEN 													--			Si Le code postal (jdf) est égale au code postal (magellan) Alors
+			CASE WHEN c.codepostal = m.cp THEN 													--			Si Le code postal (jdf) est égal au code postal (magellan) Alors
 			'O' ELSE 'N' 																		-- 			Alors O Sinon N
 			END AS ctrl_CP,																		--			On stocke le controle du code postal dans ctrl_cp
 			CASE WHEN (																			--			Si (
-						 soundex(dbo.fn_Dmot(c.adresse2)) IN									--			La composition phonétique du dernier mot de l'adresse 2 (jdf) se retrouve dans l'une de ces valeur
+						 soundex(dbo.fn_Dmot(c.adresse2)) IN									--			La composition phonétique du dernier mot de l'adresse 2 (jdf) se retrouve dans l'une de ces valeurs
 						 (																		--			( 		
 						 	soundex(dbo.fn_Dmot(m.adr1)),										--				La composition phonétique du dernier mot de l'adresse 1 (magelan)
 						  	soundex(dbo.fn_Dmot(m.adr2)),										--				La composition phonétique du dernier mot de l'adresse 2 (magelan)
@@ -107,7 +107,7 @@ Détails de la requete:
 					   ) 																		--			)
 					   AND 																		--			Et
 					   (																		--			(
-					      soundex(dbo.fn_Dmot(c.adresse3)) IN 									--			Si la composition phonétique du dernier mot de l'adresse 3 (jdf) se retrouve dans l'une de ces valeur
+					      soundex(dbo.fn_Dmot(c.adresse3)) IN 									--			Si la composition phonétique du dernier mot de l'adresse 3 (jdf) se retrouve dans l'une de ces valeurs
 					   (																		--			(
 					   	  soundex(dbo.fn_Dmot(m.adr1)),											--				La composition phonétique du dernier mot de l'adresse 1 (magelan)
 					   	  soundex(dbo.fn_Dmot(m.adr2)),											--				La composition phonétique du dernier mot de l'adresse 2 (magelan)
@@ -145,12 +145,12 @@ Détails de la requete:
 					   	  		m.Ville,														--		Sélection de la ville (magelan)
 					   	  		m.pays,															--		Sélection du pays (magelan)
 					   	  		m.ZIP_Code,														--		Sélection du code postal (magelan)
-					   	  		m.Date_adresse,													--		Sélection de la date de changement de l'adresse éffectué par magelan (magelan)
+					   	  		m.Date_adresse,													--		Sélection de la date de changement de l'adresse éffectuée par magelan (magelan)
 					   	  		m.Telephone,													--		Sélection du numéro de téléphone (magelan)
 					   	  		m.Email,														--		Sélection de l'email (magelan)
 					   	  		m.Motif_Ann,													--		Sélection du motif d'annulation (magelan)
 					   	  		m.Motif_Stop_Rel,												--		Sélection du motif ... (magelan)
-					   	  		RTRIM(m.Sous_type_tiers) AS	Sous_type_tiers,					--		Sélection du sous type tiers en supprimant les espace de droite avec pour alias Sous_type_tiers
+					   	  		RTRIM(m.Sous_type_tiers) AS	Sous_type_tiers,					--		Sélection du sous type tiers en supprimant les espaces de droite avec pour alias Sous_type_tiers
 					   	  		m.synchro,														--		Sélection ... (magelan)
 					   	  		c.email AS JDF_email,											--		Sélection de l'email (jdf)
 					   	  		CmpAsso.datedemADH,												--		(?) Sélection de la date de demande de l'adhésion (jdf)
@@ -193,12 +193,12 @@ Détails de la requete:
 				(																				--		(
 					m.compteur NOT IN 															--			Le Compteur n'est pas dans (magelan)
 						(																		--			(
-							SELECT compteur FROM magellan_anomalie								--				les compteur considerer comme anomalie (magelan)
+							SELECT compteur FROM magellan_anomalie								--				les compteur considerés comme anomalie (magelan)
 						)																		--			)
 				) 																				--		)
 				AND 																			--		Et
-				(m.Ech_fin IS NOT NULL) 														--		L'écheance de fin de magelan est null (magelan)
+				(m.Ech_fin IS NOT NULL) 														--		L'écheance de fin de magelan est nulle (magelan)
 				AND 																			--		Et
-				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)							--		Le compteur se trouve entre le compteur début et fin spécifier (magelan)
+				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)							--		Le compteur se trouve entre le compteur de début et fin spécifier (magelan)
 				
 				
