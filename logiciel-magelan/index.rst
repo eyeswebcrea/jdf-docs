@@ -6,4 +6,5 @@ Logiciel Magelan
    :maxdepth: 1 
    
    schema-run
+   faq
 
