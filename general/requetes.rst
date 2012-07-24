@@ -1,6 +1,15 @@
 Les requetes :
 ==============
 
+Ligne 4688 de Frm_integration.vb
+5034
+
+4905
+
+5161
+
+Maj_TopageCa
+
 Lexique
 =======
 
@@ -9,8 +18,8 @@ Lexique
 - EXP = (Depreced) Expert appartenant à rustica 
 - (?) = Ligne de requete dont l'explication n'est pas encore suffisant claire et validée 
 
-Me.SqlSelectCommand1
---------------------
+Me.SqlSelectCommand1 (#R1)
+--------------------------
 
 Resumée de la requête:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -201,4 +210,554 @@ Détails de la requete:
 				AND 																			--		Et
 				(m.compteur BETWEEN @compteur_dep AND @compteur_fin)							--		Le compteur se trouve entre le compteur de début et fin spécifier (magelan)
 				
+Requete (#R2)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Cette requête permet de trouver les données magellan qui n'on pas encore été importé
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	SELECT 						-- On selectionne ces champs dans les lignes
+		'N' AS ctrl_nom,		-- 
+		'N' AS ctrl_CP,			--
+		'N' AS ctrl_adr,		--
+		Code_R,					-- Le code client magélan
+		Code_P,					-- Le code client jdf
+		Code_Action,			-- Le code Action
+		Titre,					-- Le titre
+		Mnt_Offre,				-- Le montant de l'offre
+		Duree,					-- La durée de l'offre
+		mnt_Reg,				-- Le montant réglé
+		regle,					-- Si reglé ou pas
+		Ech_deb,				-- L'échéance de début
+		Ech_fin,				-- L'échéance de fin
+		Tirage_deb,				-- Le numéro de début de tirage
+		Tirage_Fin,				-- Le numéro de fin de tirage
+		Date_evt,				-- La date de l'evenement
+		Raisoc,					-- La raison sociale
+		civ,					-- La civilité
+		Nom,					-- Le Nom
+		Prenom,					-- Le prénom
+		Adr1,					-- L'adresse 
+		Adr2,					-- L'adresse suite
+		Adr3,					-- L'adresse suite
+		Adr4,					-- L'adresse suite
+		CP,						-- Le code postal
+		Ville,					-- La ville
+		pays,					-- Le pays
+		ZIP_Code,				-- Le code postal
+		Date_adresse,			-- La date de modification de l'adresse postale
+		Telephone,				-- Le téléphone
+		Email,					-- L'email
+		Motif_Ann,				-- Le motif de l'annulation
+		Motif_Stop_Rel,			-- (?) Le Motif 
+		Sous_type_tiers,		-- Le sous type tiers
+		synchro,				-- Si dispatché dans la base ou 
+		0 AS taux               -- (?)
+		compteur 				-- Le numéro de compteur
+	FROM Magellan m WHERE 		-- Dans la table magelan s'il remplisse les condition suivante...
+		(synchro = 0) AND (Code_P IS NULL) AND (compteur BETWEEN @compteur_dep AND @compteur_fin) -- La ligne n'est pas encore dispatché dans la base et le code client JDF est nul et donc pas encore identifié ainsi que si le compteur se situe entre le parametre @compteur_dep (debut) et @compteur_fin (fin)
+
+Requete (#R3)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Cette commande permet de trouver les prospect par son codeClient
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+Cmd_SearchPropect()
+
+::
+
+	SELECT -- Selection des champs dans les lignes 
+		CodeClient,		-- Code client 
+		type,			-- Type
+		Nom,			-- Nom
+		Prenom,			-- Prenom
+		CodePostal,		-- Code postal
+		Ville 			-- Ville
+	FROM Prospects WHERE 	-- Dans la table 'Prospects' dans la conditions
+		(CodeClient = @codeclient)	-- Ou le code client est égale au parametre CodeClient
+
+
+Requete (#R4)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	SELECT c.nom                    AS JDF_Nom,  -- Le nom avec pour alias JDF_NOM
+	       c.prenom                 AS JDF_Prenom, -- Le prenom avec pour alias JDF_Prenom
+	       c.adresse2               AS JDF_Adr2, 	-- L'adresse avec pour alias JDF_Adr2
+	       c.adresse3               AS JDF_adr3, 	-- L'adresse avec pour alias JDF_Adr3
+	       c.codepostal             AS JDF_cp, 		-- Le code postal avec pour alias JDF_cp
+	       c.ville                  AS JDF_Ville,   -- La ville avec pour alias JDF_Ville
+	       CASE 									-- Quand...
+	         WHEN raisoc IS NULL THEN 				-- La raison sociale est nul alors ..
+	           CASE 								-- Quand...
+	             WHEN Difference(m.nom, c.nom) > 2 	-- Le nom chez magelan et jdf sont different
+	                  AND ( ( m.prenom IS NULL      -- Et le prénom(magelan) est nul
+	                           OR m.prenom = '' ) 	-- Ou le prenom(magelan) est vide
+	                        AND ( c.prenom IS NULL 	-- Et le prénom(jdf) est nul
+	                               OR c.prenom = '' ) ) -- Or le prénom(jdf) est vide
+	                   OR Difference(m.prenom, c.prenom) > 2 THEN 'O' -- Le préson chez magélan et jdf sont différent
+	             ELSE 'N' 											-- Sinon N
+	           END 												 	-- Fin
+	         ELSE 													-- Sinon
+	           CASE 												-- Quand
+	             WHEN Difference(m.raisoc, Ltrim(c.adresse0)) > 2 	-- La raison sociale et le début de l'adresse sont différent
+	                  AND ( ( Charindex(m.nom, c.nomsociete) > 0 	-- 
+	                           OR Difference(m.nom, c.nom) > 2 )    -- Ou Si le nom de chez magelan est différent du nom de chez jdf
+	                         OR m.nom IS NULL ) THEN 'O' 			-- Ou si le nom de chez magelan est null Alors O
+	             ELSE 'N' 											-- Sinon N
+	           END 													-- Fin
+	       END                      AS ctrl_nom, 					-- Avec pour alias ctrl_nom
+	       CASE 													-- Quand...
+	         WHEN c.codepostal = m.cp THEN 'O' 						-- Le Code postal de jdf est euivalent au code postal de magelan alors 0
+	         ELSE 'N' 												-- Sinon N
+	       END                      AS ctrl_CP, 					-- On stocke le résultat dans le champ ctrl_CP
+	       CASE 													-- Quand...
+	         WHEN ( Soundex(dbo.Fn_dmot(c.adresse2)) IN ( 			-- Si la prononciation phonétique de l'adresse (jdf) équivaut à 
+	                         Soundex(dbo.Fn_dmot(m.adr1)), Soundex( -- La prononciation phonétique du dernier mot de adresse 2 (magelan)
+	                         dbo.Fn_dmot(m.adr2)), 					--
+	Soudex( 														-- 
+	dbo.Fn_dmot(m.adr3)), 											-- La composition phonétique du dernier mot de l'adresse3 de magelan  
+	Soundex( 														-- + 
+	dbo.Fn_dmot(m.adr4)) ) 											-- La composition phénotique du dernier mot de l'adresse4 de magelan  
+	OR ( c.adresse2 IS NULL 										-- Ou l'adresse 2 est nul 
+	OR Ltrim(c.adresse2) = '' ) ) 									-- ou vide
+	AND ( Soundex(dbo.Fn_dmot(c.adresse3)) IN ( 					-- La composition phonétique du dernier mot de l'adresse 
+	Soundex(dbo.Fn_dmot(m.adr1)), Soundex(dbo.Fn_dmot(m.adr2)),   	-- La composition phonétique du dernier mot de l'adrese 1 et 2 magelan
+	 Soundex( 														-- + 
+	 dbo.Fn_dmot(m.adr3)), 											-- La composition phonétique du dernier mot de l'adresse3 de magelan 
+	Soundex( 														-- + 
+	 dbo.Fn_dmot(m.adr4)) ) 										-- La composition phénotique du dernier mot de l'adresse4 de magelan  
+	OR ( c.adresse3 IS NULL 										-- Ou si l'adresse 3 jdf est nul
+	OR Ltrim(c.adresse3) = '' ) ) THEN 'O' 							-- ou vide alors O 
+	ELSE 'N' 														-- Sinon N
+	END                      AS ctrl_adr, 							-- Et on stocke le résultat dans le champ 'ctrl_adr'
+	m.code_r, 														-- [Magelan] code P (magelan)
+	m.code_action, 													-- [Magelan] code action (magelan)
+	Rtrim(m.titre)           AS titre, 								-- [Magelan] titre (magelan)
+	m.mnt_offre, 													-- [Magelan] montant offre
+	m.duree, 														-- [Magelan] duree
+	m.mnt_reg, 														-- [Magelan] Montatn réglé
+	m.regle, 														-- [Magelan] Si le client à réglé ou pas sa commande
+	m.ech_deb, 														-- [Magelan] L'echeance de début
+	m.ech_fin, 														-- [Magelan] L'échance de fin
+	m.tirage_deb, 													-- [Magelan] Le numéro de début du tirage
+	m.tirage_fin, 													-- [Magelan] Le numéro de fin du tirage
+	m.date_evt, 													-- [Magelan] (?) La date d'execution de l'action
+	m.raisoc, 														-- [Magelan] La raison sociale
+	m.civ, 															-- [Magelan] La civilité
+	m.nom, 															-- [Magelan] Le nom
+	m.prenom, 														-- [Magelan] Le prenom
+	m.adr1, 														-- [Magelan] L'adresse
+	m.adr2, 														-- [Magelan] L'adresse
+	m.adr3, 														-- [Magelan] L'adresse
+	m.adr4, 														-- [Magelan] L'adresse
+	m.cp, 															-- [Magelan] Le code postal
+	m.ville, 														-- [Magelan] La ville
+	m.pays, 														-- [Magelan] Le pays
+	m.zip_code, 													-- [Magelan] LE zip code
+	m.date_adresse, 												-- [Magelan] La date du dernier changement d'adresse
+	m.telephone, 													-- [Magelan] Le numéro de téléphone
+	m.email, 														-- [Magelan] L'email
+	m.motif_ann, 													-- [Magelan] Le motif d'annlulation
+	m.motif_stop_rel, 												-- [Magelan] Le motif stop rel
+	Rtrim(m.sous_type_tiers) AS Sous_type_tiers, 					-- [Magelan] Le souu type riers avec pour alias Sou
+	m.synchro, 														-- [Magelan] Si la ligne à été dispatché dans la base
+	c.email                  AS JDF_email, 							-- [Magelan] L'email avec pour alias JDF_email
+	cmpasso.datedemadh, 											-- [JDF] La date de demande d'adhésion					
+	cmpasso.datedemclubiste, 										-- [JDF] La date de demande clubiste
+	c.club, 														-- [JDF] Le numéro de club
+	cmpasso.isadh, 													-- [JDF] Si le client est adhérent
+	cmpasso.isclubiste,												-- [JDF] Si le client est clubiste
+	cmpasso.situation, 												-- [JDF] La situation du client
+	cmpasso.refsituation, 											-- [JDF] La référence de la situation
+	cmpasso.datesituation, 											-- [JDF] La date de la situation
+	cmpasso.dateeditioncarte, 										-- [JDF] La date d'edition de la carte
+	cmpasso.iscl, 													-- [JDF] Si le client est un clubiste
+	c.adresse1               AS JDF_Adr1, 							-- [JDF] L'adresse du client avec pour alias JDF_Adr1
+	c.nomsociete             AS JDF_Cmpnom, 						-- [JDF] Le nom de la societe du client avec pour alias JDF_Cmpnom
+	c.telephone              AS JDF_Tel, 							-- [JDF] Le téléphone du client avec pour alias JDF_Tel
+	c.type, 														-- [JDF] Le type de client
+	c.societe                AS JDF_Societe, 						-- [JDF] La société du client avec pour alias JDF_Societe
+	c.adresse0               AS JDF_Adr0, 							-- [JDF] L'adresse 0 ou Raison sociale du client avec pour alias JDF_Adr0
+	c.titre                  AS JDF_titre, 							-- [JDF] Le titre du client avec pour alias JDF_titre
+	c.codeclient             AS JDF_CC, 							-- [JDF] Le code client avec pour alias JDF_CC
+	m.compteur, 													-- [Magelan] Le code client
+	c.datemodificationfiche, 										-- [JDF] La date de modification de la fiche client
+	c.origine, 														-- [JDF] L'origine du client 
+	c.coderustica            AS JDF_CODER 							-- [JDF] Le code rustica du client avec pour alias JDF_CODER
+	FROM   magellan m 												-- Dans la date magelan avec pour alias m
+	       LEFT OUTER JOIN clients c 								-- Ainsi que dans la table **client** avec pour alias
+	                    ON m.code_p = c.codeclient 					-- On aligne la table avec le code **client** de la table client sur le code p de **rustica**
+	       LEFT OUTER JOIN cmpasso 									-- Ainsi que dans la table **cmpasso**
+	                    ON c.codeclient = cmpasso.codeclient 		-- On aliigne la table avec le code client de la table **cmpasso** sur le code client de la table **client**
+	WHERE  ( m.synchro = 0 ) 										-- Si la ligne n'est pas dispatché dans al base
+	       AND ( NOT ( m.code_p IS NULL ) ) 						-- Et que le Code client n'est pas nul
+	       AND ( m.compteur IN (SELECT compteur 					-- Et que le compteur de la table **magelan** est la collone compteur d'une des ligne de la table **magellan_anomalie**
+	                            FROM   magellan_anomalie) ) 		-- ()
+	       AND ( m.ech_fin IS NOT NULL ) 							-- Et que l'echeance fin n'est pas nul
+ 
+Requete (#R4)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+SELECT m.compteur 											-- Compteur
+FROM   magellan m 											-- Dans la table magelan avec pour alias m 
+       LEFT OUTER JOIN clients c 							-- Joint à la table client avec pour alias c
+                    ON m.code_p = c.codeclient 				-- On aligne le champ code client de la table ``client`` au code p de la table ``magelan``
+       LEFT OUTER JOIN cmpasso 								-- Joint à la table cmpasso 
+                    ON c.codeclient = cmpasso.codeclient 	-- On aligne le champ code client de la table ``client`` au code client de la table ``cmpasso``
+WHERE  ( m.synchro = 0 ) 									-- Quand la ligne n'est pas encore dispatché en base
+       AND ( NOT ( m.code_p IS NULL ) ) 					-- Et que le code p n'est pas nul
+       AND ( m.compteur NOT IN (SELECT compteur 			-- Ainsi que le compteur ne se trouve pas dans les anomalie
+                                FROM   magellan_anomalie) ) -- De la table ``magellan_anomalie``
+       AND ( m.ech_fin IS NOT NULL ) 						-- Et que le champ ech_fin n'est pas nulj'ai
+       
+        
+Requete (#R5)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+:: info:
+	Magellan_Affecter_Code_Client
+
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+UPDATE magellan cc 			-- Mise à jour de la table magelan avec pour alias cc
+SET    code_p = '' 			-- Le code p est égale au parametre code_p
+WHERE  code_p IS NULL 		-- Dans les lignes ou le code p est null
+       AND compteur = "" 	-- Et ou le compteur est égale au parametre compteur
+     
+Requete (#R6)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+:: info:
+	Magellan_Supprimer_Code_P
+
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~   
+
+UPDATE magellan 
+SET    code_p = NULL 
+WHERE  compteur = "" 
+
+
+Requete (#R7)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~     
+
+update CmpAsso  
+		set
+            datedemadh=''
+		    datenomadh='', -- [IIF]
+            optdistrib=1 ou optdistrib=0 -- [IIF]
+            isadh=1,
+            situation = '',
+            refsituation=''
+        where 
+        codeclient=
+        
+Requete (#R8)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+   select 
+   		code_r,		   -- Le code R   
+   		ech_fin 	   -- L'écheance début
+   		from magellan  -- sur la table magelan
+   where 			   -- Quand...
+   		compteur = 	   -- Le compteur est égale au parametre compteur
+
+Requete (#R9)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_ADH_DEMISSION
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+       
+update CmpAsso set datedemadh=getdate(),isadh=0,situation='X',refsituation='A:" & DataView1.Item(cm.Position)("compteur") & "' " _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+        
+Requete (#R10)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_ADR_DEMISSION
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+        
+update CmpAsso set datedemclubiste=getdate(),isclubiste=0,situation_apr='X',refsituation_apr='> Magellan' " _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+
+Requete (#R11)
+--------------
+
+Resumé de la requete :
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CompAsso_Clubiste
+
+Schematique de la requete :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
+            & "',datenomclubiste='" & DataView1.Item(cm.Position)("ech_deb") & "',isclubiste=1 " _
+            & IIf(codes <> "" And codes <> "*", ",situation='" & codes & "',refsituation='" & codes & ":" & DataView1.Item(cm.Position)("Compteur") & "'", "") _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+
+
+Requete (#R12)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_Clubiste
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+"update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
+            & "',datenomclubiste=isnull(datenomclubiste,'" & DataView1.Item(cm.Position)("ech_deb") & "'),isclubiste=1 " _
+            & ",situation_apr='" & codes_rusti & "',refsituation_apr='" & codes_rusti & ":" & DataView1.Item(cm.Position)("Compteur") & "'" _
+            & IIf(RAZ_INFO_ADH, ",datenomadh=null,datedemadh=null,situation=null,refsituation='RAZ Mage.' ", "") _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p")
+
+Requete (#R13)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_Exper_Clubiste
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
+            & "',datenomclubiste=isnull(datenomclubiste,'" & DataView1.Item(cm.Position)("ech_deb") & "'),isclubiste=1 " _
+            & ",situation_apr='" & codes_rusti & "',refsituation_apr='" & codes_rusti & ":" & DataView1.Item(cm.Position)("Compteur") & "'" _
+            & IIf(RAZ_INFO_ADH, ",datenomadh=null,datedemadh=null,situation=null,refsituation='RAZ Mage.' ", "") _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+Requete (#R14)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+	Modifier_CmpAsso_abonnepur
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+            sc = New SqlCommand("update CmpAsso set datedemabo='" & DataView1.Item(cm.Position)("ech_fin") _
+            & "',datenomabo='" & DataView1.Item(cm.Position)("ech_deb") & "',isabo=1 " _
+            & IIf(codes <> "" And codes <> "*", ",situation='" & codes & "',refsituation='" & codes & ":" & DataView1.Item(cm.Position)("Compteur") & "'", "") _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+Requete (#R15)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_abonnePur_Demission
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+update CmpAsso set datedemabo=getdate(),isabo=0 " _
+            & IIf(DataView1.Item(cm.Position)("isadh"), "", "situation='X',refsituation='Magellan:'" & DataView1.Item(cm.Position)("compteur").ToString()) _
+            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+
+Requete (#R16)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Suspens un compte utilisateur pas son code client
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_Ref_SUSP
+
+Type: PNJ,VPC
+
+Sous type : ADH, ADE
+UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+
+Sous type : APR, EXP
+UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+
+Type : PNJ_ABO_PUR
+UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+
+
+Requete (#R1l)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_ADH
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+update CmpAsso set datedemadh='' -- On met a jour la table CmpAsso avec le champ datedemadh (équivalent de ech_fin)
+			datenomadh='' 	-- [OPTIONELLE] Date dmh = ech_fin
+            optdistrib=1 optdistrib=0 -- (?)
+            isadh=1, 		-- Definir que le client est un adhérent
+            situation = '',
+            refsituation=':'
+		where 				-- Pour les lignes ou ..
+			codeclient="" 	-- Le code client est égale au parametre code client
+
+Requete (#R?)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+	IsAnnuCorrespondSynchroEnCours
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+select code_r,ech_fin from magellan where compteur = " & Compteur1, New SqlConnection(SqlConnection1.ConnectionString)
+
+Requete (#R?)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
 				

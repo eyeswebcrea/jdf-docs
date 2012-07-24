@@ -97,7 +97,7 @@ Lexique
 	
 	.. image:: images/ds_in_Analyse.png 
 
-.. note:: 
+.. note::
 
 	- ncc = numéro code client
 	

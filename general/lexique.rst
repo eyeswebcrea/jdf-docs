@@ -18,3 +18,18 @@ Lexique
 - les champs ctrl_* sont des valeurs de controle de conformité des champs ce ne sont pas de vrai champ en bdd
 - m.Code_P = c.CodeClient , c.CodeClient = CmpAsso.codeclient | Ces champs sont la représentation du code client
 - da = DataAcces équivalent des entité symfony
+- Adresse0 = Début de l'adresse ou certain mettre leur raison sociale (ex : Microsoft )
+- Situation : S = SUSPENDU
+- datedemadh = ech_fin (a comfirmer)
+- datenomadh = ech_deb (a comfirmer)
+- VPC = Vente par correspondance
+
+
+Code situtations 
+================
+refsituation peut être égale a refsituation + ":" + compteur
+
+S = SUSPENDU
+
+AB = Adhérent qui à réglé
+69 = Adhérent qui la pas réglé

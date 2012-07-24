@@ -10,5 +10,6 @@ General
    sql-functions-scalaire
    sql-stockate-procedure
    details-tables
+   data-mapping
 
   
