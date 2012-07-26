@@ -20,9 +20,10 @@ Lexique
 - da = DataAcces équivalent des entité symfony
 - Adresse0 = Début de l'adresse ou certain mettre leur raison sociale (ex : Microsoft )
 - Situation : S = SUSPENDU
-- datedemadh = ech_fin (a comfirmer)
-- datenomadh = ech_deb (a comfirmer)
+- datedemadh = date de demition ech_fin (a comfirmer) 
+- datenomadh = date de nomitation ech_deb (a comfirmer)
 - VPC = Vente par correspondance
+- situation_apr = codes_rusti
 
 
 Code situtations 

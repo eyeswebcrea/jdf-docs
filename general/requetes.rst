@@ -1,15 +1,6 @@
 Les requetes :
 ==============
 
-Ligne 4688 de Frm_integration.vb
-5034
-
-4905
-
-5161
-
-Maj_TopageCa
-
 Lexique
 =======
 
@@ -437,17 +428,19 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-SELECT m.compteur 											-- Compteur
-FROM   magellan m 											-- Dans la table magelan avec pour alias m 
-       LEFT OUTER JOIN clients c 							-- Joint à la table client avec pour alias c
-                    ON m.code_p = c.codeclient 				-- On aligne le champ code client de la table ``client`` au code p de la table ``magelan``
-       LEFT OUTER JOIN cmpasso 								-- Joint à la table cmpasso 
-                    ON c.codeclient = cmpasso.codeclient 	-- On aligne le champ code client de la table ``client`` au code client de la table ``cmpasso``
-WHERE  ( m.synchro = 0 ) 									-- Quand la ligne n'est pas encore dispatché en base
-       AND ( NOT ( m.code_p IS NULL ) ) 					-- Et que le code p n'est pas nul
-       AND ( m.compteur NOT IN (SELECT compteur 			-- Ainsi que le compteur ne se trouve pas dans les anomalie
-                                FROM   magellan_anomalie) ) -- De la table ``magellan_anomalie``
-       AND ( m.ech_fin IS NOT NULL ) 						-- Et que le champ ech_fin n'est pas nulj'ai
+::
+
+	SELECT m.compteur 											-- Compteur
+	FROM   magellan m 											-- Dans la table magelan avec pour alias m 
+	       LEFT OUTER JOIN clients c 							-- Joint à la table client avec pour alias c
+	                    ON m.code_p = c.codeclient 				-- On aligne le champ code client de la table ``client`` au code p de la table ``magelan``
+	       LEFT OUTER JOIN cmpasso 								-- Joint à la table cmpasso 
+	                    ON c.codeclient = cmpasso.codeclient 	-- On aligne le champ code client de la table ``client`` au code client de la table ``cmpasso``
+	WHERE  ( m.synchro = 0 ) 									-- Quand la ligne n'est pas encore dispatché en base
+	       AND ( NOT ( m.code_p IS NULL ) ) 					-- Et que le code p n'est pas nul
+	       AND ( m.compteur NOT IN (SELECT compteur 			-- Ainsi que le compteur ne se trouve pas dans les anomalie
+	                                FROM   magellan_anomalie) ) -- De la table ``magellan_anomalie``
+	       AND ( m.ech_fin IS NOT NULL ) 						-- Et que le champ ech_fin n'est pas nulj'ai
        
         
 Requete (#R5)
@@ -466,10 +459,12 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-UPDATE magellan cc 			-- Mise à jour de la table magelan avec pour alias cc
-SET    code_p = '' 			-- Le code p est égale au parametre code_p
-WHERE  code_p IS NULL 		-- Dans les lignes ou le code p est null
-       AND compteur = "" 	-- Et ou le compteur est égale au parametre compteur
+::
+
+	UPDATE magellan cc 			-- Mise à jour de la table magelan avec pour alias cc
+	SET    code_p = '' 			-- Le code p est égale au parametre code_p
+	WHERE  code_p IS NULL 		-- Dans les lignes ou le code p est null
+	       AND compteur = "" 	-- Et ou le compteur est égale au parametre compteur
      
 Requete (#R6)
 -------------
@@ -487,9 +482,11 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~   
 
-UPDATE magellan 
-SET    code_p = NULL 
-WHERE  compteur = "" 
+::
+
+	UPDATE magellan 
+	SET    code_p = NULL 
+	WHERE  compteur = "" 
 
 
 Requete (#R7)
@@ -504,16 +501,18 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~     
 
-update CmpAsso  
-		set
-            datedemadh=''
-		    datenomadh='', -- [IIF]
-            optdistrib=1 ou optdistrib=0 -- [IIF]
-            isadh=1,
-            situation = '',
-            refsituation=''
-        where 
-        codeclient=
+::
+
+	update CmpAsso  
+			set
+	            datedemadh=''
+			    datenomadh='', -- [IIF]
+	            optdistrib=1 ou optdistrib=0 -- [IIF]
+	            isadh=1,
+	            situation = '',
+	            refsituation=''
+	        where 
+	        codeclient=
         
 Requete (#R8)
 -------------
@@ -526,6 +525,9 @@ Schematique de la requete :
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
    select 
    		code_r,		   -- Le code R   
    		ech_fin 	   -- L'écheance début
@@ -547,8 +549,14 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
        
-update CmpAsso set datedemadh=getdate(),isadh=0,situation='X',refsituation='A:" & DataView1.Item(cm.Position)("compteur") & "' " _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+::
+
+	UPDATE cmpasso 
+	SET    datedemadh = Getdate(), 
+	       isadh = 0, 
+	       situation = 'X', 
+	       refsituation = 'A:' 
+	WHERE  codeclient = "" 
         
 Requete (#R10)
 -------------
@@ -563,9 +571,15 @@ Schematique de la requete :
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
-        
-update CmpAsso set datedemclubiste=getdate(),isclubiste=0,situation_apr='X',refsituation_apr='> Magellan' " _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemclubiste = Getdate(), 
+	       isclubiste = 0, 
+	       situation_apr = 'X', 
+	       refsituation_apr = '> Magellan' 
+	WHERE  codeclient = "" 
 
 
 Requete (#R11)
@@ -582,11 +596,15 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
-            & "',datenomclubiste='" & DataView1.Item(cm.Position)("ech_deb") & "',isclubiste=1 " _
-            & IIf(codes <> "" And codes <> "*", ",situation='" & codes & "',refsituation='" & codes & ":" & DataView1.Item(cm.Position)("Compteur") & "'", "") _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+::
 
+	UPDATE cmpasso 
+	SET    datedemclubiste = '', 
+	       datenomclubiste = '', 
+	       isclubiste = 1, 
+	       situation = '', 
+	       refsituation = '' 
+	WHERE  codeclient = "" 
 
 
 Requete (#R12)
@@ -603,11 +621,19 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-"update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
-            & "',datenomclubiste=isnull(datenomclubiste,'" & DataView1.Item(cm.Position)("ech_deb") & "'),isclubiste=1 " _
-            & ",situation_apr='" & codes_rusti & "',refsituation_apr='" & codes_rusti & ":" & DataView1.Item(cm.Position)("Compteur") & "'" _
-            & IIf(RAZ_INFO_ADH, ",datenomadh=null,datedemadh=null,situation=null,refsituation='RAZ Mage.' ", "") _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p")
+::
+
+	UPDATE cmpasso 
+	SET    datedemclubiste = '', 
+	       datenomclubiste = Isnull(datenomclubiste, ''), 
+	       isclubiste = 1, 
+	       situation_apr = '', 
+	       refsituation_apr = '', 
+	       datenomadh = NULL, 
+	       datedemadh = NULL, 
+	       situation = NULL, 
+	       refsituation = 'RAZ Mage.' 
+	WHERE  codeclient = "p" 
 
 Requete (#R13)
 -------------
@@ -623,12 +649,19 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
+::
 
-update CmpAsso set datedemclubiste='" & DataView1.Item(cm.Position)("ech_fin") _
-            & "',datenomclubiste=isnull(datenomclubiste,'" & DataView1.Item(cm.Position)("ech_deb") & "'),isclubiste=1 " _
-            & ",situation_apr='" & codes_rusti & "',refsituation_apr='" & codes_rusti & ":" & DataView1.Item(cm.Position)("Compteur") & "'" _
-            & IIf(RAZ_INFO_ADH, ",datenomadh=null,datedemadh=null,situation=null,refsituation='RAZ Mage.' ", "") _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+	UPDATE cmpasso 
+	SET    datedemclubiste = '', 
+	       datenomclubiste = Isnull(datenomclubiste, ''), 
+	       isclubiste = 1, 
+	       situation_apr = '', 
+	       refsituation_apr = '', 
+	       datenomadh = NULL, 
+	       datedemadh = NULL, 
+	       situation = NULL, 
+	       refsituation = 'RAZ Mage.' 
+	WHERE  codeclient = "" 
 
 Requete (#R14)
 -------------
@@ -644,10 +677,15 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-            sc = New SqlCommand("update CmpAsso set datedemabo='" & DataView1.Item(cm.Position)("ech_fin") _
-            & "',datenomabo='" & DataView1.Item(cm.Position)("ech_deb") & "',isabo=1 " _
-            & IIf(codes <> "" And codes <> "*", ",situation='" & codes & "',refsituation='" & codes & ":" & DataView1.Item(cm.Position)("Compteur") & "'", "") _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+::
+
+	UPDATE cmpasso 
+	SET    datedemabo = '', 
+	       datenomabo = '', 
+	       isabo = 1, 
+	       situation = '', 
+	       refsituation = '' 
+	WHERE  codeclient = "" 
 
 Requete (#R15)
 -------------
@@ -663,10 +701,14 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-update CmpAsso set datedemabo=getdate(),isabo=0 " _
-            & IIf(DataView1.Item(cm.Position)("isadh"), "", "situation='X',refsituation='Magellan:'" & DataView1.Item(cm.Position)("compteur").ToString()) _
-            & "where codeclient=" & DataView1.Item(cm.Position)("code_p"), New SqlConnection(Me.SqlConnection1.ConnectionString))
+::
 
+	UPDATE cmpasso 
+	SET    datedemabo = Getdate(), 
+	       isabo = 0, 
+	       situation = 'X', 
+	       refsituation = 'Magellan:000' 
+	WHERE  codeclient = "" 
 
 Requete (#R16)
 -------------
@@ -675,6 +717,7 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Suspens un compte utilisateur pas son code client
+Modifier_CmpAsso_Ref_SUSP
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -682,27 +725,27 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Modifier_CmpAsso_Ref_SUSP
+::
 
-Type: PNJ,VPC
-
-Sous type : ADH, ADE
-UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
-SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
-       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
-WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
-
-Sous type : APR, EXP
-UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
-SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
-       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
-WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
-
-Type : PNJ_ABO_PUR
-UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
-SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
-       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
-WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+	Type: PNJ,VPC
+	
+	Sous type : ADH, ADE
+	UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+	SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+	       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+	WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+	
+	Sous type : APR, EXP
+	UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+	SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+	       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+	WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
+	
+	Type : PNJ_ABO_PUR
+	UPDATE cmpasso 						-- Mise à jour de la table cmpasso 
+	SET    situation = 'S', 			-- On met ``S`` pour valeur au champ situation (S = SUSPENDU)
+	       refsituation = 'SUSPENDU' 	-- On met ``SUSPENDU`` pour valeur au champ refsitation 
+	WHERE  codeclient = "" 				-- Pour les lignes donc le code client est égale au parametre ``codeclient``
 
 
 Requete (#R1l)
@@ -719,17 +762,18 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
+::
 
-update CmpAsso set datedemadh='' -- On met a jour la table CmpAsso avec le champ datedemadh (équivalent de ech_fin)
-			datenomadh='' 	-- [OPTIONELLE] Date dmh = ech_fin
-            optdistrib=1 optdistrib=0 -- (?)
-            isadh=1, 		-- Definir que le client est un adhérent
-            situation = '',
-            refsituation=':'
-		where 				-- Pour les lignes ou ..
-			codeclient="" 	-- Le code client est égale au parametre code client
+	update CmpAsso set datedemadh='' -- On met a jour la table CmpAsso avec le champ datedemadh (équivalent de ech_fin)
+				datenomadh='' 	-- [OPTIONELLE] Date dmh = ech_fin
+	            optdistrib=1 optdistrib=0 -- (?)
+	            isadh=1, 		-- Definir que le client est un adhérent
+	            situation = '',
+	            refsituation=':'
+			where 				-- Pour les lignes ou ..
+				codeclient="" 	-- Le code client est égale au parametre code client
 
-Requete (#R?)
+Requete (#R12)
 -------------
 
 Resumé de la requete : 
@@ -745,14 +789,138 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-select code_r,ech_fin from magellan where compteur = " & Compteur1, New SqlConnection(SqlConnection1.ConnectionString)
+::
 
-Requete (#R?)
+	SELECT code_r, 
+	       ech_fin 
+	FROM   magellan 
+	WHERE  compteur = "" 
+
+Requete (#R13)
 -------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
 
+Modifier_CmpAsso_ADH_DEMISSION
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemadh = Getdate(), 
+	       isadh = 0, 
+	       situation = 'X', 
+	       refsituation = 'A:0001' 
+	WHERE  codeclient = "" 
+
+
+Requete (#R14)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_APR_DEMISSION
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemclubiste = Getdate(), 
+	       isclubiste = 0, 
+	       situation_apr = 'X', 
+	       refsituation_apr = '> Magellan' 
+	WHERE  codeclient = "" 
+
+Requete (#R15)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_Clubiste
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemclubiste = '', 
+	       datenomclubiste = '', 
+	       isclubiste = 1, 
+	       codes <> "" And codes <> "*",
+	       situation = '', 
+	       refsituation = ':' 
+	WHERE  codeclient = "" 
+
+
+Requete (#R16)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_Exper_Clubiste
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemclubiste = '', 
+	       datenomclubiste = Isnull(datenomclubiste, ''), 
+	       isclubiste = 1, 
+	       situation_apr = '', 
+	       refsituation_apr = '' 
+	WHERE  codeclient = "" 
+
+Requete (#R17)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_abonnePur
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemabo = '', 
+	       datenomabo = '', 
+	       isabo = 1 
+
+Requete (#R18)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Modifier_CmpAsso_abonnePur_Demission
 
 
 Schematique de la requete : 
@@ -760,4 +928,322 @@ Schematique de la requete :
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    datedemabo = Getdate(), 
+	       isabo = 0, 
+	       situation = 'X', 
+	       refsituation = 'Magellan:' 
+	WHERE  codeclient = "" 
+
+Requete (#R19)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Client_Changer_de_Club
+
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE clients 
+	SET    coderustica = '' 
+	WHERE  codeclient = "" 
+
+Requete (#R20)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Maj_TopageCa
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE topageca 
+	SET    dateretour = Getdate(), 
+	       idmagellan = "" 
+	WHERE  codeclient = "" 
+	       AND idmagellan IS NULL 
+
+Requete (#R21)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Is_Wait_TopageCa
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	SELECT Count(*) 
+	FROM   topageca 
+	WHERE  codeclient = "" 
+	       AND idmagellan IS NULL 
+
+Requete (#R22)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Synchro_Email_Tel
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE clients 
+	SET    datemodificationfiche = Getdate(), 
+	       opmodif = 99 
+	       SET%%
+	WHERE  codeclient = "" 
+	
+	UPDATE clients 
+	SET    datemodificationfiche = Getdate(), 
+	       opmodif = 99 
+	       SET%%
+	WHERE  codeclient = "" 
+
+Requete (#R23)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Synchro_MOADR
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE clients 
+	SET    datemodificationfiche = Getdate(), 
+	       opmodif = 99 
+	       SET%%
+	WHERE  codeclient = "" 
+
+Requete (#R24)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Maj_TopageCa
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE topageca 
+	SET    dateretour = Getdate(), 
+	       idmagellan = "" 
+	WHERE  codeclient = "" 
+	       AND idmagellan IS NULL 
+
+Requete (#R25)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Is_Wait_TopageCa
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	SELECT Count(*) 
+	FROM   topageca 
+	WHERE  codeclient = "" 
+	       AND idmagellan IS NULL 
+
+Requete (#R26)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Client_ToperDateEditionCarte
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE cmpasso 
+	SET    dateeditioncarte = '' 
+	WHERE  codeclient = "" 
+
+Requete (#R27)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Demander_CA
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	INSERT INTO topageca 
+	            (codeclient, 
+	             daterequete, 
+	             idmagellan) 
+	VALUES      ("", 
+	             Getdate(), 
+	             "") 
+
+Requete (#R28)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+MAJ_Adr_Fiche_Client
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE clients 
+	SET    datemodificationfiche = Getdate(), 
+	       opmodif = 99, 
+	       champ = valeur 
+	WHERE  codeclient = "" 
+	
+	UPDATE clients 
+	SET    datemodificationfiche = Getdate(), 
+	       opmodif = 99 
+	       SET%%
+	WHERE  codeclient = "" 
+
+Requete (#R29)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Toper_Fiche_Pour_Changement_club
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	INSERT INTO topages 
+	VALUES     ("", 
+	            'EdtFCA', 
+	            Getdate(), 
+	            "", 
+	            1) 
+
+Requete (#R30)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+MenuItem7_Click
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	UPDATE magellan 
+	SET    code_p = NULL 
+	WHERE  compteur = "" 
+
+Requete (#R31)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+Toper_ligne_Anomalie
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	INSERT INTO magellan_anomalie 
+	VALUES      ("", 
+	             "") 
+
+Requete (#R32)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+MAJ_DateSynchroCoti
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+jdf_Magellan_Upd_dateSynchro
+
 				
