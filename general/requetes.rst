@@ -422,6 +422,8 @@ Requete (#R4)
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
 
+On selectionne les lignes à dispatcher (?)
+
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -430,7 +432,7 @@ Détails de la requete:
 
 ::
 
-	SELECT m.compteur 											-- Compteur
+	SELECT m.compteur 											-- Selectione Compteur
 	FROM   magellan m 											-- Dans la table magelan avec pour alias m 
 	       LEFT OUTER JOIN clients c 							-- Joint à la table client avec pour alias c
 	                    ON m.code_p = c.codeclient 				-- On aligne le champ code client de la table ``client`` au code p de la table ``magelan``
@@ -440,7 +442,7 @@ Détails de la requete:
 	       AND ( NOT ( m.code_p IS NULL ) ) 					-- Et que le code p n'est pas nul
 	       AND ( m.compteur NOT IN (SELECT compteur 			-- Ainsi que le compteur ne se trouve pas dans les anomalie
 	                                FROM   magellan_anomalie) ) -- De la table ``magellan_anomalie``
-	       AND ( m.ech_fin IS NOT NULL ) 						-- Et que le champ ech_fin n'est pas nulj'ai
+	       AND ( m.ech_fin IS NOT NULL ) 						-- Et que le champ ech_fin n'est pas nul
        
         
 Requete (#R5)
@@ -450,12 +452,15 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 :: info:
+
 	Magellan_Affecter_Code_Client
+
+On renseigne le code p des ligne de la table magelan dont le compteur est égale au parametre compteur
 
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*
+
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -473,8 +478,11 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 :: info:
+
 	Magellan_Supprimer_Code_P
 
+
+On supprime le code p pour les ligne selectioner
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -494,6 +502,9 @@ Requete (#R7)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+
+(?)
+
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -520,6 +531,8 @@ Requete (#R8)
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
 
+On récupere le code r et l'échéance de début des ligne de la table magelan dont le compteur est spécifié
+
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -540,8 +553,11 @@ Requete (#R9)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_ADH_DEMISSION
+	Modifier_CmpAsso_ADH_DEMISSION
+
+La personen démisionne de son status d'adhérent
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -550,24 +566,28 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
        
 ::
--- Se référér à la doc pour l'existation de la situation et du code Situation
-	UPDATE cmpasso 					-- Mise à jour de la table cmpasso
-	SET    datedemadh = Getdate(), 	-- La date de demission de l'adhérent est égale à la date du jour
-	       isadh = 0, 				-- On le définit comme n'étant pas un adhérent
-	       situation = 'X', 		-- La situation est égale à 'X' 
-	       refsituation = 'A:' 		-- La référence situation est égale à 'A:'
-	WHERE  codeclient = "" 			-- Si le code client est égale au code p de la vue en cours
+
+	-- Se référér à la doc pour l'existation de la situation et du code Situation
+		UPDATE cmpasso 					-- Mise à jour de la table cmpasso
+		SET    datedemadh = Getdate(), 	-- La date de demission de l'adhérent est égale à la date du jour
+		       isadh = 0, 				-- On le définit comme n'étant pas un adhérent
+		       situation = 'X', 		-- La situation est égale à 'X' 
+		       refsituation = 'A:' 		-- La référence situation est égale à 'A:'
+		WHERE  codeclient = "" 			-- Si le code client est égale au code p de la vue en cours
         
 Requete (#R10)
 -------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_ADR_DEMISSION
+	Modifier_CmpAsso_ADR_DEMISSION
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La personne démisione de son status de clubiste
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -588,8 +608,11 @@ Requete (#R11)
 
 Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CompAsso_Clubiste
+	Modifier_CompAsso_Clubiste
+
+On met a jour le compte asso du clubiste vis a vis de la vue actuelle
 
 Schematique de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -613,8 +636,12 @@ Requete (#R12)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_Clubiste
+	Modifier_CmpAsso_Clubiste
+
+On met a jour le compte asso du clubiste vis a vis de la vue actuelle
+La différence ici est qu'on RAZ sa situation à 0
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -641,8 +668,11 @@ Requete (#R13)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_Exper_Clubiste
+	Modifier_CmpAsso_Exper_Clubiste
+
+On modifie le compte asso du clubiste exper (?)
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -675,6 +705,8 @@ Resumé de la requete :
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+On modifie un comtpe asso pour le déc larter en temps qu'abonner pur
+
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -693,8 +725,11 @@ Requete (#R15)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_abonnePur_Demission
+	Modifier_CmpAsso_abonnePur_Demission
+
+On met fin à l'abonnement d'un abonnée pur
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -718,7 +753,10 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Suspens un compte utilisateur pas son code client
-Modifier_CmpAsso_Ref_SUSP
+
+:: info:
+
+	Modifier_CmpAsso_Ref_SUSP
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -754,8 +792,11 @@ Requete (#R1l)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_ADH
+	Modifier_CmpAsso_ADH
+
+On met a jour le compte asso de l'adhérent 
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -779,13 +820,14 @@ Requete (#R12)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
 	IsAnnuCorrespondSynchroEnCours
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	
+	On verifie si (?)
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -802,8 +844,11 @@ Requete (#R13)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_ADH_DEMISSION
+	Modifier_CmpAsso_ADH_DEMISSION
+
+L'adhérent démissione
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -826,8 +871,11 @@ Requete (#R14)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
+	
+	Modifier_CmpAsso_APR_DEMISSION
 
-Modifier_CmpAsso_APR_DEMISSION
+(?)
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -849,8 +897,11 @@ Requete (#R15)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_Clubiste
+	Modifier_CmpAsso_Clubiste
+
+On modifie la situation du clubiste
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -875,8 +926,11 @@ Requete (#R16)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_Exper_Clubiste
+	Modifier_CmpAsso_Exper_Clubiste
+
+On modifie la situation exper du clubiste
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -899,8 +953,11 @@ Requete (#R17)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_abonnePur
+	Modifier_CmpAsso_abonnePur
+
+(?)
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -920,9 +977,11 @@ Requete (#R18)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Modifier_CmpAsso_abonnePur_Demission
+	Modifier_CmpAsso_abonnePur_Demission
 
+L'abonne pur met fin a son abonement
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -944,8 +1003,11 @@ Requete (#R19)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Client_Changer_de_Club
+	Client_Changer_de_Club
+
+Le client change de club et par conséquent de numéro de club
 
 
 Schematique de la requete : 
@@ -965,8 +1027,11 @@ Requete (#R20)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Maj_TopageCa
+	Maj_TopageCa
+
+On met a jour les information de derniere requete du topage ca
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -987,8 +1052,11 @@ Requete (#R21)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Is_Wait_TopageCa
+	Is_Wait_TopageCa
+
+On regarde si le client à un topageca ou pas pour si besoin le faire
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1008,8 +1076,11 @@ Requete (#R22)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Synchro_Email_Tel
+	Synchro_Email_Tel
+
+On syncrhonise les information de contact champ par champ en indant la date de modification
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1036,8 +1107,11 @@ Requete (#R23)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Synchro_MOADR
+	Synchro_MOADR
+
+On met a jour la modification d'adresse en indiquant al date de modification
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1058,8 +1132,11 @@ Requete (#R24)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Maj_TopageCa
+	Maj_TopageCa
+
+On met a jour le ca du clinet
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1080,8 +1157,11 @@ Requete (#R25)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Is_Wait_TopageCa
+	Is_Wait_TopageCa
+
+Deja fait
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1101,8 +1181,11 @@ Requete (#R26)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Client_ToperDateEditionCarte
+	Client_ToperDateEditionCarte
+
+On met a jour la date d'edition de la carte du client
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1121,8 +1204,12 @@ Requete (#R27)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Demander_CA
+	Demander_CA
+
+Quand on demande le ca d'un client on informe la table topageca de la date de la requete avec pour référence
+Le code client et l'identifiant magelan
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1145,8 +1232,13 @@ Requete (#R28)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-MAJ_Adr_Fiche_Client
+	MAJ_Adr_Fiche_Client
+
+Mise à jour de l'adresse du client en changean la date de al modification de la fiche par la date du jour de l'action
+
+On ne peut modifier qu'un champ a la fois
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1155,27 +1247,31 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
-	-- On ne modifie qu'un champ a la fois avec cette requete
-	
-	UPDATE clients 									-- Mise à jour de la table 'clients'
-	SET    datemodificationfiche = Getdate(), 		-- La date de modification de la fiche est égale à la date du jours
-	       opmodif = 99, 							-- L'identifiant d'opération de la modif est égale à 99
-	       champ = valeur 							-- Le champ précisé est égale à la valeur précisé
-	WHERE  codeclient = "" 							-- Pour les lignes dont le code client est égale à (?) La référence situation est définir comme 'RAZ Mage.'
-	
-	UPDATE clients 
-	SET    datemodificationfiche = Getdate(), 
-	       opmodif = 99 
-	       SET%%
-	WHERE  codeclient = "" 
+
+		-- On ne modifie qu'un champ a la fois avec cette requete
+		
+		UPDATE clients 									-- Mise à jour de la table 'clients'
+		SET    datemodificationfiche = Getdate(), 		-- La date de modification de la fiche est égale à la date du jours
+		       opmodif = 99, 							-- L'identifiant d'opération de la modif est égale à 99
+		       champ = valeur 							-- Le champ précisé est égale à la valeur précisé
+		WHERE  codeclient = "" 							-- Pour les lignes dont le code client est égale à (?) La référence situation est définir comme 'RAZ Mage.'
+		
+		UPDATE clients 
+		SET    datemodificationfiche = Getdate(), 
+		       opmodif = 99 
+		       SET%%
+		WHERE  codeclient = "" 
 
 Requete (#R29)
 -------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Toper_Fiche_Pour_Changement_club
+	Toper_Fiche_Pour_Changement_club
+
+Ici on insere les topage pour ls changement de club et ainsi conserver un historique
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1197,14 +1293,17 @@ Requete (#R30)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-MenuItem7_Click
+	MenuItem7_Click
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
+
+Suppression du code p d'une ligne dans magellan dont le compteur est égale au compteur de la vue en cours
 
 ::
 
@@ -1217,8 +1316,11 @@ Requete (#R31)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-Toper_ligne_Anomalie
+	Toper_ligne_Anomalie
+
+Ici on insert les anomalie magellan quand il y en as en reseignent le code anomalie et le numéro de compteur
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1230,7 +1332,7 @@ Détails de la requete:
 
 	INSERT INTO magellan_anomalie 	-- On insere un enregistrement dans la table 'magellan_anomalie'
 	VALUES      ("", 				-- Le compteur est égale au compteur de la vue en cours
-	             "") 				-- Le code anomalue est égale au paramètre Code_Anomalie
+	             "") 				-- Le code anomalie est égale au paramètre Code_Anomalie
 
 Requete (#R32)
 -------------
@@ -1239,6 +1341,9 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 MAJ_DateSynchroCoti
+
+Cette requete n'est pas vraiment une requete il faudras songé à la déplacée 
+(?)
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1256,6 +1361,8 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 MenuItem4_Click
+
+Suppression d'une anomalie magellan
 
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
