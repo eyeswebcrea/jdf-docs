@@ -30,6 +30,7 @@ Lexique
 
 Code situtations 
 ================
+
 refsituation peut être égale a refsituation + ":" + compteur
 
 S = SUSPENDU
