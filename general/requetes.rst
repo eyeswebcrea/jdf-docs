@@ -484,9 +484,9 @@ Détails de la requete:
 
 ::
 
-	UPDATE magellan 
-	SET    code_p = NULL 
-	WHERE  compteur = "" 
+	UPDATE magellan 			-- Mise à jour de la table magelan
+	SET    code_p = NULL 		-- Le code p est égale à nul
+	WHERE  compteur = "" 		-- Si le compteur est égale à au compteur de analyse
 
 
 Requete (#R7)
@@ -503,16 +503,16 @@ Détails de la requete:
 
 ::
 
-	update CmpAsso  
-			set
-	            datedemadh=''
-			    datenomadh='', -- [IIF]
-	            optdistrib=1 ou optdistrib=0 -- [IIF]
-	            isadh=1,
-	            situation = '',
-	            refsituation=''
-	        where 
-	        codeclient=
+	update CmpAsso  			-- Mise à jour de la table CmpAsso
+			set 				-- Modification
+	            datedemadh=''	-- La date de demission de l'adhérent
+			    datenomadh='', -- [IIF] La date de nomination de l'adhérent est égale à 
+	            optdistrib=1 ou optdistrib=0 -- [IIF] 
+	            isadh=1, -- On le définit comme adhérent
+	            situation = '',	-- La situation est égale à
+	            refsituation=''	-- La référence situation est égale à 
+	        where 				-- Si
+	        codeclient=			-- Le code client est égale à 
         
 Requete (#R8)
 -------------
@@ -528,7 +528,7 @@ Détails de la requete:
 
 ::
 
-   select 
+   select 			   -- On sélectionne...
    		code_r,		   -- Le code R   
    		ech_fin 	   -- L'écheance début
    		from magellan  -- sur la table magelan
@@ -550,13 +550,13 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
        
 ::
-
-	UPDATE cmpasso 
-	SET    datedemadh = Getdate(), 
-	       isadh = 0, 
-	       situation = 'X', 
-	       refsituation = 'A:' 
-	WHERE  codeclient = "" 
+-- Se référér à la doc pour l'existation de la situation et du code Situation
+	UPDATE cmpasso 					-- Mise à jour de la table cmpasso
+	SET    datedemadh = Getdate(), 	-- La date de demission de l'adhérent est égale à la date du jour
+	       isadh = 0, 				-- On le définit comme n'étant pas un adhérent
+	       situation = 'X', 		-- La situation est égale à 'X' 
+	       refsituation = 'A:' 		-- La référence situation est égale à 'A:'
+	WHERE  codeclient = "" 			-- Si le code client est égale au code p de la vue en cours
         
 Requete (#R10)
 -------------
@@ -573,13 +573,14 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
+	-- Rappel le code client est égale au code p
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = Getdate(), 
-	       isclubiste = 0, 
-	       situation_apr = 'X', 
-	       refsituation_apr = '> Magellan' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 							-- Mise à jour de la table 'cmpasso'
+	SET    datedemclubiste = Getdate(), 	-- La date de démission du clubiste est égale à la date du jour
+	       isclubiste = 0, 					-- La personne n'est plus clubiste
+	       situation_apr = 'X', 			-- Sa situation apr est égale à 'X'
+	       refsituation_apr = '> Magellan' 	-- Et sa référence situation apr est égale à '> Magellan'
+	WHERE  codeclient = "" 					-- Si le code client est égale a au code p de la vue en cours
 
 
 Requete (#R11)
@@ -598,13 +599,13 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = '', 
-	       datenomclubiste = '', 
-	       isclubiste = 1, 
-	       situation = '', 
-	       refsituation = '' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 					-- Mise à jour de la table 'cmpasso'
+	SET    datedemclubiste = '', 	-- La date de démission du clubiste est égale à la vue actuelle
+	       datenomclubiste = '', 	-- La date de nomination du clubiste est égale à la vue actuelle
+	       isclubiste = 1, 			-- La personne est définit comme étant clubiste
+	       situation = '', 			-- La situation est égale au parametre codes
+	       refsituation = '' 		-- La référence situation est égale au aprametres codes suivie du numéro de compteur séparé par ':' (ex : A:454147)
+	WHERE  codeclient = "" 			-- Si le code client est égale à la vue courante du code p
 
 
 Requete (#R12)
@@ -623,17 +624,17 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = '', 
-	       datenomclubiste = Isnull(datenomclubiste, ''), 
-	       isclubiste = 1, 
-	       situation_apr = '', 
-	       refsituation_apr = '', 
-	       datenomadh = NULL, 
-	       datedemadh = NULL, 
-	       situation = NULL, 
-	       refsituation = 'RAZ Mage.' 
-	WHERE  codeclient = "p" 
+	UPDATE cmpasso 					-- Mise à jour de al table cmpasso
+	SET    datedemclubiste = '', 	-- La date de demision du clubiste est égale à l'échéance fin de la vue
+	       datenomclubiste = Isnull(datenomclubiste, ''), -- La date de nomination du clubiste est égale soit la date de nomitation du clubiste soit à '' si celle ci est null
+	       isclubiste = 1, 			-- La personne est défini comme étant clubiste
+	       situation_apr = '', 		-- La situation apr est égale à (?)
+	       refsituation_apr = '', 	-- La référence situation apr est égale à (?)
+	       datenomadh = NULL, 		-- La date de nomination de l'adhérent est défini comme null
+	       datedemadh = NULL, 		-- La date de démission de l'adhérent est défini comme null
+	       situation = NULL, 		-- La situation est défini comme null
+	       refsituation = 'RAZ Mage.' -- La référence situation est définir comme 'RAZ Mage.'
+	WHERE  codeclient = "p" 		-- Si le code client est égale à p
 
 Requete (#R13)
 -------------
@@ -651,17 +652,17 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = '', 
-	       datenomclubiste = Isnull(datenomclubiste, ''), 
-	       isclubiste = 1, 
-	       situation_apr = '', 
-	       refsituation_apr = '', 
-	       datenomadh = NULL, 
-	       datedemadh = NULL, 
-	       situation = NULL, 
-	       refsituation = 'RAZ Mage.' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 					-- Mise à jour de la table 'cmpasso'
+	SET    datedemclubiste = '',    -- La date de demision du clubiste est égale à l'échéance fin de la vue
+	       datenomclubiste = Isnull(datenomclubiste, ''), -- La date de nomination du clubiste est égale soit la date de nomitation du clubiste soit à '' si celle ci est null
+	       isclubiste = 1, 				-- On définit la personen comem étatn clubiste
+	       situation_apr = '', 			-- (?)
+	       refsituation_apr = '', 		-- (?) 
+	       datenomadh = NULL, 			-- La date de nomination de l'adhérent est défini comme null
+	       datedemadh = NULL, 			-- La date de démission de l'adhérent est défini comme null
+	       situation = NULL, 			-- La situation est défini comme null
+	       refsituation = 'RAZ Mage.' 	-- La référence situation est définir comme 'RAZ Mage.'
+	WHERE  codeclient = "" 				-- Si le code client est égale à p
 
 Requete (#R14)
 -------------
@@ -679,13 +680,13 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemabo = '', 
-	       datenomabo = '', 
-	       isabo = 1, 
-	       situation = '', 
-	       refsituation = '' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 				-- Mise à jour de la table cmpasso
+	SET    datedemabo = '', 	-- La date de démission de l'abonner est égale à l'echeance fin de la vue
+	       datenomabo = '', 	-- La date dé nomitation de l'abonner est égale à l'échéance début de la vue
+	       isabo = 1, 			-- La personne est définit comme étant abonner 
+	       situation = '', 		-- La situation est égale à au paramètre codes
+	       refsituation = '' 	-- La référence situation est égale au paramètre codes plus au compteur spéraré par ':' (ex : A:86544)
+	WHERE  codeclient = "" 		-- Le code client est égale au code p de al vue
 
 Requete (#R15)
 -------------
@@ -703,12 +704,12 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemabo = Getdate(), 
-	       isabo = 0, 
-	       situation = 'X', 
-	       refsituation = 'Magellan:000' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 							-- Mise à jour de la table cmpasso
+	SET    datedemabo = Getdate(), 			-- La date de demission de l'abonné est égale à la date du jour
+	       isabo = 0, 						-- On définit l'aboner comme n'étant plus un abonnée
+	       situation = 'X', 				-- La situation est égale à 'X'
+	       refsituation = 'Magellan:000' 	-- La référence situation est égale à 'Magelan:000'
+	WHERE  codeclient = "" 					-- Le code client est égale au code p de la vue
 
 Requete (#R16)
 -------------
@@ -768,7 +769,7 @@ Détails de la requete:
 				datenomadh='' 	-- [OPTIONELLE] Date dmh = ech_fin
 	            optdistrib=1 optdistrib=0 -- (?)
 	            isadh=1, 		-- Definir que le client est un adhérent
-	            situation = '',
+	            situation = '',	-- La situation est égale à 
 	            refsituation=':'
 			where 				-- Pour les lignes ou ..
 				codeclient="" 	-- Le code client est égale au parametre code client
@@ -791,10 +792,10 @@ Détails de la requete:
 
 ::
 
-	SELECT code_r, 
-	       ech_fin 
-	FROM   magellan 
-	WHERE  compteur = "" 
+	SELECT code_r, 			-- On séléction le code r
+	       ech_fin 			-- Et l'échéance fin
+	FROM   magellan 		-- Dans la table magelan
+	WHERE  compteur = "" 	-- Dont le compteur est égale au Parametre Compteur1
 
 Requete (#R13)
 -------------
@@ -812,12 +813,12 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemadh = Getdate(), 
-	       isadh = 0, 
-	       situation = 'X', 
-	       refsituation = 'A:0001' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 						-- On modifie la table 'cmpassco'
+	SET    datedemadh = Getdate(), 		-- La date de démission de l'adhérent est égale à la date du jour
+	       isadh = 0, 					-- La personne n'est plus déclaré comme étant abonnée
+	       situation = 'X', 			-- La situation est égale à 'X'
+	       refsituation = 'A:0001' 		-- La référence situation est égale a 'A:0001'
+	WHERE  codeclient = "" 				-- Pour les ligne dont le code client est égale au code p de al vue ene cours
 
 
 Requete (#R14)
@@ -836,12 +837,12 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = Getdate(), 
-	       isclubiste = 0, 
-	       situation_apr = 'X', 
-	       refsituation_apr = '> Magellan' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 							-- On met à jour la table cmpasso
+	SET    datedemclubiste = Getdate(), 	-- On definit la daté de démission du clubiste à la date du jour
+	       isclubiste = 0, 					-- La personne n'est plus définit comme clubiste
+	       situation_apr = 'X', 			-- La situation apr est égale à 'X'
+	       refsituation_apr = '> Magellan' 	-- La référence situation apr est égale à '> Magellan'
+	WHERE  codeclient = "" 					-- Le code client est égale au code p de la vue en cours
 
 Requete (#R15)
 -------------
@@ -858,15 +859,15 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
-
-	UPDATE cmpasso 
-	SET    datedemclubiste = '', 
-	       datenomclubiste = '', 
-	       isclubiste = 1, 
-	       codes <> "" And codes <> "*",
-	       situation = '', 
-	       refsituation = ':' 
-	WHERE  codeclient = "" 
+		
+	UPDATE cmpasso 							-- Mise à jour de la table 'cmpasso'
+	SET    datedemclubiste = '', 			-- La date de démission du clubiste est égale à l'echéance fin de la vue en cours
+	       datenomclubiste = '', 			-- La date de nomination du clubiste est égale à l'échéance début de la vue en cours
+	       isclubiste = 1, 					-- La personne est définit comme étant clubiste 
+	       codes <> "" And codes <> "*",	-- (?)
+	       situation = '', 					-- La situation est égale au parametre codes
+	       refsituation = ':' 				-- La référence situation est égale au paramètre codes + le compteur de la vue séparé par un ':' (ex: A:84649)
+	WHERE  codeclient = "" 					-- Le code client est égale au code p de la vue
 
 
 Requete (#R16)
@@ -885,13 +886,13 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemclubiste = '', 
-	       datenomclubiste = Isnull(datenomclubiste, ''), 
-	       isclubiste = 1, 
-	       situation_apr = '', 
-	       refsituation_apr = '' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 												-- Mise à jour de la table 'cmpasso'
+	SET    datedemclubiste = '', 								-- La date de démission du clubiste est égale à l'échéance fin de la vue en cours
+	       datenomclubiste = Isnull(datenomclubiste, ''), 		-- La date de nomination du clubiste est égale à null ou a la date de nomination du clubiste dans la vue en cours
+	       isclubiste = 1, 										-- On définit la personne comme étant clubiste
+	       situation_apr = '', 									-- La situation apr est égale au parametre codes_rusti
+	       refsituation_apr = '' 								-- La référence situation apr est égale au parametre codes_rusti plus le compteur de la vue en cours séparé apr un ':' (ex: A:856555)
+	WHERE  codeclient = "" 										-- Le code client est égale au code p de la vue en cours
 
 Requete (#R17)
 -------------
@@ -909,10 +910,10 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemabo = '', 
-	       datenomabo = '', 
-	       isabo = 1 
+	UPDATE cmpasso 				-- Mise à jour de la table cmpasso
+	SET    datedemabo = '', 	-- La date de démission de l'abonner est égale à (?)
+	       datenomabo = '', 	-- La date de nomination de l'abonner est égale à (?)
+	       isabo = 1 			-- La personne est définit comme étant abonner
 
 Requete (#R18)
 -------------
@@ -931,12 +932,12 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    datedemabo = Getdate(), 
-	       isabo = 0, 
-	       situation = 'X', 
-	       refsituation = 'Magellan:' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 						-- Mise à jour de la table 'cmpasso'
+	SET    datedemabo = Getdate(), 		-- La date de démission de l'abonner est égale à la date du jour
+	       isabo = 0, 					-- L'abonner n'est plus déclaré comme étant abonnée
+	       situation = 'X', 			-- La situation est égale à 'X'
+	       refsituation = 'Magellan:' 	-- La référence situation ést égale à 'Magellan':
+	WHERE  codeclient = "" 				-- Pour les lignes dont le code client est égale au code p de la vue en cours
 
 Requete (#R19)
 -------------
@@ -955,9 +956,9 @@ Détails de la requete:
 
 ::
 
-	UPDATE clients 
-	SET    coderustica = '' 
-	WHERE  codeclient = "" 
+	UPDATE clients 				-- Mise à jour de la table 'clients'
+	SET    club = '' 			-- Le code club est égale au paramètre club
+	WHERE  codeclient = "" 		-- Pour les ligne dont le code client est égale au code p de la vue en cours
 
 Requete (#R20)
 -------------
@@ -975,14 +976,14 @@ Détails de la requete:
 
 ::
 
-	UPDATE topageca 
-	SET    dateretour = Getdate(), 
-	       idmagellan = "" 
-	WHERE  codeclient = "" 
-	       AND idmagellan IS NULL 
+	UPDATE topageca 					-- Mise à jour de la table 'topageca'
+	SET    dateretour = Getdate(), 		-- La date de retour est égale à la date du jour
+	       idmagellan = "" 				-- L'identifiant magellan est égale au compteur de la vue en cours
+	WHERE  codeclient = "" 				-- Pour les lignes dont le code client est égale au code p de la vue en cours
+	       AND idmagellan IS NULL 		-- Et dont l'identifiant magellan est null
 
 Requete (#R21)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -997,10 +998,10 @@ Détails de la requete:
 
 ::
 
-	SELECT Count(*) 
-	FROM   topageca 
-	WHERE  codeclient = "" 
-	       AND idmagellan IS NULL 
+	SELECT Count(*) 				-- Selection du nombre de ligne
+	FROM   topageca 				-- Dans la table 'topageca'
+	WHERE  codeclient = "" 			-- Pour les ligne dont le code client est égale au code p de la vue en cours
+	       AND idmagellan IS NULL 	-- Et dont l'identifiant magellan est égale à null
 
 Requete (#R22)
 -------------
@@ -1018,11 +1019,11 @@ Détails de la requete:
 
 ::
 
-	UPDATE clients 
-	SET    datemodificationfiche = Getdate(), 
-	       opmodif = 99 
-	       SET%%
-	WHERE  codeclient = "" 
+	UPDATE clients 										-- Mise à jour de la table 'clients'
+	SET    datemodificationfiche = Getdate(), 			-- La date de modification de la fiche est égale à la date du jour
+	       opmodif = 99 								-- (?) L'opération de modifcation est '99'
+	       SET%%														
+	WHERE  codeclient = "" 								-- LE code client est égale au code p de la vue actuelle
 	
 	UPDATE clients 
 	SET    datemodificationfiche = Getdate(), 
@@ -1046,11 +1047,11 @@ Détails de la requete:
 
 ::
 
-	UPDATE clients 
-	SET    datemodificationfiche = Getdate(), 
-	       opmodif = 99 
+	UPDATE clients 								-- Mise à jour de la table clients
+	SET    datemodificationfiche = Getdate(), 	-- La date de modification de la fiche est la date du jour
+	       opmodif = 99 						-- L'id de l'opération de modificatione est '99'
 	       SET%%
-	WHERE  codeclient = "" 
+	WHERE  codeclient = "" 						-- Pour les ligne dont le code client est égale au code p de la vue en cours
 
 Requete (#R24)
 -------------
@@ -1068,11 +1069,11 @@ Détails de la requete:
 
 ::
 
-	UPDATE topageca 
-	SET    dateretour = Getdate(), 
-	       idmagellan = "" 
-	WHERE  codeclient = "" 
-	       AND idmagellan IS NULL 
+	UPDATE topageca 				-- Mise à jour de la table 'topageca'
+	SET    dateretour = Getdate(), 	-- La date de retour est égale à la date du jour
+	       idmagellan = "" 			-- L'identifiant magellan est égale à (?)
+	WHERE  codeclient = "" 			-- Pour les lignes dont le code client est égale à (?)
+	       AND idmagellan IS NULL 	-- Le l'identifiant magellan est égale a null
 
 Requete (#R25)
 -------------
@@ -1090,10 +1091,10 @@ Détails de la requete:
 
 ::
 
-	SELECT Count(*) 
-	FROM   topageca 
-	WHERE  codeclient = "" 
-	       AND idmagellan IS NULL 
+	SELECT Count(*) 				-- On compte le nombre de ligne
+	FROM   topageca 				-- Dans la table 'topageca'
+	WHERE  codeclient = "" 			-- Pour les lignes dont le code client est égale au code p de la vue en cours
+	       AND idmagellan IS NULL 	-- Et dont l'id magellan est null
 
 Requete (#R26)
 -------------
@@ -1111,9 +1112,9 @@ Détails de la requete:
 
 ::
 
-	UPDATE cmpasso 
-	SET    dateeditioncarte = '' 
-	WHERE  codeclient = "" 
+	UPDATE cmpasso 					-- Mise à jour de la table 'cmpasso'
+	SET    dateeditioncarte = '' 	-- La date d'edition de la carte est égale au parametre d
+	WHERE  codeclient = "" 			-- Pour les lignes dont le code client est égale au code p de la vue en cours
 
 Requete (#R27)
 -------------
@@ -1131,13 +1132,13 @@ Détails de la requete:
 
 ::
 
-	INSERT INTO topageca 
-	            (codeclient, 
-	             daterequete, 
-	             idmagellan) 
-	VALUES      ("", 
-	             Getdate(), 
-	             "") 
+	INSERT INTO topageca 			-- On insert un enregistrement dans la table topageca
+	            (codeclient, 		-- Le code client
+	             daterequete, 		-- La date de al requete
+	             idmagellan) 		-- L'identifiant magelan
+	VALUES      ("", 				-- Le code client est égale au parametre cc (cc = code client)
+	             Getdate(), 		-- La date de la requete est égale à la date du jour
+	             "") 				-- L'identifiant magellan est égale au caparemtre cpt (cpt est égale a l'id magelan)
 
 Requete (#R28)
 -------------
@@ -1154,12 +1155,13 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 ::
-
-	UPDATE clients 
-	SET    datemodificationfiche = Getdate(), 
-	       opmodif = 99, 
-	       champ = valeur 
-	WHERE  codeclient = "" 
+	-- On ne modifie qu'un champ a la fois avec cette requete
+	
+	UPDATE clients 									-- Mise à jour de la table 'clients'
+	SET    datemodificationfiche = Getdate(), 		-- La date de modification de la fiche est égale à la date du jours
+	       opmodif = 99, 							-- L'identifiant d'opération de la modif est égale à 99
+	       champ = valeur 							-- Le champ précisé est égale à la valeur précisé
+	WHERE  codeclient = "" 							-- Pour les lignes dont le code client est égale à (?) La référence situation est définir comme 'RAZ Mage.'
 	
 	UPDATE clients 
 	SET    datemodificationfiche = Getdate(), 
@@ -1183,12 +1185,12 @@ Détails de la requete:
 
 ::
 
-	INSERT INTO topages 
-	VALUES     ("", 
-	            'EdtFCA', 
-	            Getdate(), 
-	            "", 
-	            1) 
+	INSERT INTO topages 	-- On insert un enregistrement dans la table 'topages'
+	VALUES     ("", 		-- LE code p est égale au code p de la vue en cours
+	            'EdtFCA',   -- Le champ (?) est égale à 'EdtFCA'
+	            Getdate(), 	-- Le champ (?) est égale à la date du jours
+	            "", 		-- Le numéro de club est égale au numéro de club de la vue en cours
+	            1) 			-- Le champ (?) est égale à 1
 
 Requete (#R30)
 -------------
@@ -1206,9 +1208,9 @@ Détails de la requete:
 
 ::
 
-	UPDATE magellan 
-	SET    code_p = NULL 
-	WHERE  compteur = "" 
+	UPDATE magellan 		-- Mise à jour de la table 'magellan'
+	SET    code_p = NULL 	-- Le code p est null
+	WHERE  compteur = "" 	-- Pour les ligne dont le compteur est égale au compteur de la vue en cours
 
 Requete (#R31)
 -------------
@@ -1226,9 +1228,9 @@ Détails de la requete:
 
 ::
 
-	INSERT INTO magellan_anomalie 
-	VALUES      ("", 
-	             "") 
+	INSERT INTO magellan_anomalie 	-- On insere un enregistrement dans la table 'magellan_anomalie'
+	VALUES      ("", 				-- Le compteur est égale au compteur de la vue en cours
+	             "") 				-- Le code anomalue est égale au paramètre Code_Anomalie
 
 Requete (#R32)
 -------------
@@ -1245,5 +1247,26 @@ Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 jdf_Magellan_Upd_dateSynchro
+
+
+Requete (#R33)
+-------------
+
+Resumé de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~
+
+MenuItem4_Click
+
+Schematique de la requete : 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Détails de la requete:
+~~~~~~~~~~~~~~~~~~~~~~
+
+delete 							-- Supprime les enregistrement 
+	from Magellan_anomalie 		-- de la table 'Magellan_anomalie'
+	where     					-- Pour les ligne dont..
+		compteur = ''			-- Le compteur est égale au compteur de la vue en cours
+
 
 				

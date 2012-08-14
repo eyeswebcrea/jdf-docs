@@ -24,6 +24,8 @@ Lexique
 - datenomadh = date de nomitation ech_deb (a comfirmer)
 - VPC = Vente par correspondance
 - situation_apr = codes_rusti
+- opmodif = id d'opération de modification
+- cpt = idmagellan
 
 
 Code situtations 

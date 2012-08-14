@@ -2,6 +2,10 @@
 Schéma de fonctionnement
 ========================
 
+Pratiquement la plupart des dispatch de la table ``magelan`` se font dans la table cmpAsso
+
+On rappelle que la table cmpAsso n'est pas une table itérative
+
 .. code-block:: php
 
   But_phase1_Click() // l’ors du click sur le bouton phase 1 : Nouveau client 
