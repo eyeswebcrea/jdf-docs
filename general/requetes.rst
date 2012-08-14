@@ -37,8 +37,8 @@ Des lignes dont un des champs suivant :
 
 de la table magelan sont présents en double dans la table client 
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -209,8 +209,8 @@ Resumé de la requete :
 
 Cette requête permet de trouver les données magellan qui n'on pas encore été importé
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -266,8 +266,8 @@ Resumé de la requete :
 
 Cette commande permet de trouver les prospect par son codeClient
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -293,8 +293,8 @@ Requete (#R4)
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -424,8 +424,8 @@ Resumé de la requete :
 
 On selectionne les lignes à dispatcher (?)
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -458,8 +458,8 @@ Resumé de la requete :
 On renseigne le code p des ligne de la table magelan dont le compteur est égale au parametre compteur
 
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -484,8 +484,8 @@ Resumé de la requete :
 
 On supprime le code p pour les ligne selectioner
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~   
@@ -506,8 +506,8 @@ Resumé de la requete :
 (?)
 
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~     
@@ -533,8 +533,8 @@ Resumé de la requete :
 
 On récupere le code r et l'échéance de début des ligne de la table magelan dont le compteur est spécifié
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -559,8 +559,8 @@ Resumé de la requete :
 
 La personen démisionne de son status d'adhérent
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -584,8 +584,8 @@ Resumé de la requete :
 
 	Modifier_CmpAsso_ADR_DEMISSION
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La personne démisione de son status de clubiste
 
@@ -614,8 +614,8 @@ Resumé de la requete :
 
 On met a jour le compte asso du clubiste vis a vis de la vue actuelle
 
-Schematique de la requete :
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -643,8 +643,8 @@ Resumé de la requete :
 On met a jour le compte asso du clubiste vis a vis de la vue actuelle
 La différence ici est qu'on RAZ sa situation à 0
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -674,8 +674,8 @@ Resumé de la requete :
 
 On modifie le compte asso du clubiste exper (?)
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -702,8 +702,8 @@ Resumé de la requete :
 
 	Modifier_CmpAsso_abonnepur
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On modifie un comtpe asso pour le déc larter en temps qu'abonner pur
 
@@ -731,8 +731,8 @@ Resumé de la requete :
 
 On met fin à l'abonnement d'un abonnée pur
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -758,8 +758,8 @@ Suspens un compte utilisateur pas son code client
 
 	Modifier_CmpAsso_Ref_SUSP
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -798,8 +798,8 @@ Resumé de la requete :
 
 On met a jour le compte asso de l'adhérent 
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -824,8 +824,8 @@ Resumé de la requete :
 
 	IsAnnuCorrespondSynchroEnCours
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	On verifie si (?)
 
@@ -850,8 +850,8 @@ Resumé de la requete :
 
 L'adhérent démissione
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -877,8 +877,8 @@ Resumé de la requete :
 
 (?)
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -903,8 +903,8 @@ Resumé de la requete :
 
 On modifie la situation du clubiste
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -932,8 +932,8 @@ Resumé de la requete :
 
 On modifie la situation exper du clubiste
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -959,8 +959,8 @@ Resumé de la requete :
 
 (?)
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -983,8 +983,8 @@ Resumé de la requete :
 
 L'abonne pur met fin a son abonement
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1010,8 +1010,8 @@ Resumé de la requete :
 Le client change de club et par conséquent de numéro de club
 
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1033,8 +1033,8 @@ Resumé de la requete :
 
 On met a jour les information de derniere requete du topage ca
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1058,8 +1058,8 @@ Resumé de la requete :
 
 On regarde si le client à un topageca ou pas pour si besoin le faire
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1082,8 +1082,8 @@ Resumé de la requete :
 
 On syncrhonise les information de contact champ par champ en indant la date de modification
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1113,8 +1113,8 @@ Resumé de la requete :
 
 On met a jour la modification d'adresse en indiquant al date de modification
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1138,8 +1138,8 @@ Resumé de la requete :
 
 On met a jour le ca du clinet
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1163,8 +1163,8 @@ Resumé de la requete :
 
 Deja fait
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1187,8 +1187,8 @@ Resumé de la requete :
 
 On met a jour la date d'edition de la carte du client
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1211,8 +1211,8 @@ Resumé de la requete :
 Quand on demande le ca d'un client on informe la table topageca de la date de la requete avec pour référence
 Le code client et l'identifiant magelan
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1240,8 +1240,8 @@ Mise à jour de l'adresse du client en changean la date de al modification de la
 
 On ne peut modifier qu'un champ a la fois
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1273,8 +1273,8 @@ Resumé de la requete :
 
 Ici on insere les topage pour ls changement de club et ainsi conserver un historique
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1299,8 +1299,8 @@ Resumé de la requete :
 
 Suppression du code p d'une ligne dans magellan dont le compteur est égale au compteur de la vue en cours
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1322,8 +1322,8 @@ Resumé de la requete :
 
 Ici on insert les anomalie magellan quand il y en as en reseignent le code anomalie et le numéro de compteur
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1348,8 +1348,8 @@ MAJ_DateSynchroCotiDétails de la requete:
 Cette requete n'est pas vraiment une requete il faudras songé à la déplacée 
 (?)
 
-Schematique de la requeDétails de la requete:te : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1364,13 +1364,15 @@ Requete (#R33)
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
+:: info:
 
-MenuItem4_Click
+	MenuItem4_Click
+	
 Détails de la requete:
 Suppression d'une anomalie magellan
 
-Schematique de la requete : 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Schematique de la requete 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
