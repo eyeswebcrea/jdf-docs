@@ -1351,10 +1351,12 @@ Cette requete n'est pas vraiment une requete il faudras songé à la déplacée
 Schematique de la requeDétails de la requete:te : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Détails de la requete:DDétails de la requete:étails de la requete:
+Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-jdf_Magellan_Upd_dateSynchro
+::
+
+	jdf_Magellan_Upd_dateSynchro
 
 
 Requete (#R33)
@@ -1373,10 +1375,12 @@ Schematique de la requete :
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
-delete 							-- Supprime les enregistrement 
-	from Magellan_anomalie 		-- de la table 'Magellan_anomalie'
-	where     					-- Pour les ligne dont..
-		compteur = ''			-- Le compteur est égale au compteur de la vue en cours
+::
+	
+	delete 							-- Supprime les enregistrement 
+		from Magellan_anomalie 		-- de la table 'Magellan_anomalie'
+		where     					-- Pour les ligne dont..
+			compteur = ''			-- Le compteur est égale au compteur de la vue en cours
 
 
 				
