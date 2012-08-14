@@ -576,7 +576,7 @@ Détails de la requete:
 		WHERE  codeclient = "" 			-- Si le code client est égale au code p de la vue en cours
         
 Requete (#R10)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -632,7 +632,7 @@ Détails de la requete:
 
 
 Requete (#R12)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -664,7 +664,7 @@ Détails de la requete:
 	WHERE  codeclient = "p" 		-- Si le code client est égale à p
 
 Requete (#R13)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -695,7 +695,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 				-- Si le code client est égale à p
 
 Requete (#R14)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -721,7 +721,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 		-- Le code client est égale au code p de al vue
 
 Requete (#R15)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -747,7 +747,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 					-- Le code client est égale au code p de la vue
 
 Requete (#R16)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -788,7 +788,7 @@ Détails de la requete:
 
 
 Requete (#R1l)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -816,7 +816,7 @@ Détails de la requete:
 				codeclient="" 	-- Le code client est égale au parametre code client
 
 Requete (#R12)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -840,7 +840,7 @@ Détails de la requete:
 	WHERE  compteur = "" 	-- Dont le compteur est égale au Parametre Compteur1
 
 Requete (#R13)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -867,7 +867,7 @@ Détails de la requete:
 
 
 Requete (#R14)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -893,7 +893,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 					-- Le code client est égale au code p de la vue en cours
 
 Requete (#R15)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -922,7 +922,7 @@ Détails de la requete:
 
 
 Requete (#R16)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -949,7 +949,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 										-- Le code client est égale au code p de la vue en cours
 
 Requete (#R17)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -973,7 +973,7 @@ Détails de la requete:
 	       isabo = 1 			-- La personne est définit comme étant abonner
 
 Requete (#R18)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -999,7 +999,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 				-- Pour les lignes dont le code client est égale au code p de la vue en cours
 
 Requete (#R19)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1023,7 +1023,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 		-- Pour les ligne dont le code client est égale au code p de la vue en cours
 
 Requete (#R20)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1072,7 +1072,7 @@ Détails de la requete:
 	       AND idmagellan IS NULL 	-- Et dont l'identifiant magellan est égale à null
 
 Requete (#R22)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1103,7 +1103,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 
 
 Requete (#R23)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1128,7 +1128,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 						-- Pour les ligne dont le code client est égale au code p de la vue en cours
 
 Requete (#R24)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1153,7 +1153,7 @@ Détails de la requete:
 	       AND idmagellan IS NULL 	-- Le l'identifiant magellan est égale a null
 
 Requete (#R25)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1177,7 +1177,7 @@ Détails de la requete:
 	       AND idmagellan IS NULL 	-- Et dont l'id magellan est null
 
 Requete (#R26)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1200,7 +1200,7 @@ Détails de la requete:
 	WHERE  codeclient = "" 			-- Pour les lignes dont le code client est égale au code p de la vue en cours
 
 Requete (#R27)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1228,7 +1228,7 @@ Détails de la requete:
 	             "") 				-- L'identifiant magellan est égale au caparemtre cpt (cpt est égale a l'id magelan)
 
 Requete (#R28)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1263,7 +1263,7 @@ Détails de la requete:
 		WHERE  codeclient = "" 
 
 Requete (#R29)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1289,7 +1289,7 @@ Détails de la requete:
 	            1) 			-- Le champ (?) est égale à 1
 
 Requete (#R30)
--------------
+--------------
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1297,13 +1297,13 @@ Resumé de la requete :
 
 	MenuItem7_Click
 
+Suppression du code p d'une ligne dans magellan dont le compteur est égale au compteur de la vue en cours
+
 Schematique de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Détails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
-
-Suppression du code p d'une ligne dans magellan dont le compteur est égale au compteur de la vue en cours
 
 ::
 
@@ -1332,23 +1332,26 @@ Détails de la requete:
 
 	INSERT INTO magellan_anomalie 	-- On insere un enregistrement dans la table 'magellan_anomalie'
 	VALUES      ("", 				-- Le compteur est égale au compteur de la vue en cours
-	             "") 				-- Le code anomalie est égale au paramètre Code_Anomalie
+	             "") 	Détails de la requete:Détails de la requete:			-- Le code anomalie est égale au paramètre Code_Anomalie
 
 Requete (#R32)
--------------
+--------------
+
+Détails de la requete :
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Resumé de la requete : 
 ~~~~~~~~~~~~~~~~~~~~~~
 
-MAJ_DateSynchroCoti
+MAJ_DateSynchroCotiDétails de la requete:
 
 Cette requete n'est pas vraiment une requete il faudras songé à la déplacée 
 (?)
 
-Schematique de la requete : 
+Schematique de la requeDétails de la requete:te : 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Détails de la requete:
+Détails de la requete:DDétails de la requete:étails de la requete:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 jdf_Magellan_Upd_dateSynchro
@@ -1361,7 +1364,7 @@ Resumé de la requete :
 ~~~~~~~~~~~~~~~~~~~~~~
 
 MenuItem4_Click
-
+Détails de la requete:
 Suppression d'une anomalie magellan
 
 Schematique de la requete : 
